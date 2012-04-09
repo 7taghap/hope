@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+
+    <beans:bean id="customAuthListener" class="com.rb.gwthope.server.security.CustomAuthListener"/>
+
+    <http auto-config="true">
+        <intercept-url pattern="/hope/*" access="ROLE_USER"/>
+<!--         <intercept-url pattern="/gwt/**" access="ROLE_USER"/> -->
+        <intercept-url pattern="/**/*.html" access="ROLE_USER"/>
+        <intercept-url pattern="/**/*.jsp" access="ROLE_USER"/>
+        <intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+    </http>
+    
+    <beans:bean id="customAuthenticationProvider" class="com.rb.gwthope.server.security.CustomAuthenticationProvider" />    
+    
+    <authentication-manager alias="authenticationManager">
+	    <authentication-provider ref="customAuthenticationProvider"/>
+	</authentication-manager>
+        
+</beans:beans>
