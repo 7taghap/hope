@@ -1,6 +1,6 @@
 <%@ include file="/taglibs.jsp"%>
 
-<form:form commandName="product" method="post" action="save">
+<form:form commandName="product" method="post" action="save.html">
 	<input type="hidden" name="flightId" value="${flight.id}" />
 	<table class="cw-FlexTable">
 
@@ -80,7 +80,7 @@
 <!--  product detail in hidden  -->
 
 <div id="dtlform" style="display:none">
-<form:form commandName="productDtl" method="post" action="addItemAjax" id="productDtlForm">
+<form:form commandName="productDtl" method="post" action="addItemAjax.html" id="productDtlForm">
 <h1> Product Detail </h1>
 	<table  class="cw-FlexTable">
 		<tr>
@@ -127,11 +127,10 @@
 
     
     $("#addProductDtl").click(function() {
-		//$("#box-table").addData(["hello","world"],true);
-		//$("#box-table").find("tbody").append(tr);
+	
 		$.ajax({
 			type:"post",
-			url:"addItemAjax",
+			url:"addItemAjax.html",
 			data:$("#productDtlForm").serializeArray(),
 			success:function(data) {
 				var aData=new Array();
@@ -145,6 +144,7 @@
 				$("#box-table").addData(aData,true);
 				
 			}
+			
 			});
 		TopUp.overlayClose();
 		return false;

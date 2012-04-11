@@ -80,7 +80,7 @@ public class ProductManagerImpl implements ProductManager{
 
 	public Product saveProduct(Product product) throws ProductNotSaveException,
 	NoSuchNameException, NoSuchStatusException {
-		
+		System.out.println("save invoke");
 		if (product.getUnitConversion()!=null) {
 			if(product.getUnitConversion().getId() < 1 && 
 					product.getUnitConversion().getName()!=null) {
@@ -111,6 +111,7 @@ public class ProductManagerImpl implements ProductManager{
 		}
 //		product.setstatusDao.getActive();
 		product.setProductDtls(productDtls);
+		logger.info("exccute save");
 		product = productDao.saveProduct(product);
 		
 		return product;

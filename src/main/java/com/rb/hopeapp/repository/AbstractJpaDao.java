@@ -27,18 +27,18 @@ public abstract class AbstractJpaDao< K,T extends Serializable > {
 	       .getResultList();
 	   }
 	   
-	   public void save( final T entity ){
+	   public void save( T entity ){
 	      entityManager.persist( entity );
 	   }
 	   
-	   public void update( final T entity ){
+	   public void update( T entity ){
 	      entityManager.merge( entity );
 	   }
 	   
-	   public void delete( final T entity ){
+	   public void delete(  T entity ){
 	      entityManager.remove( entity );
 	   }
-	   public void deleteById( final K entityId ){
+	   public void deleteById( K entityId ){
 	      final T entity = findOne( entityId );
 	      
 	      delete( entity );

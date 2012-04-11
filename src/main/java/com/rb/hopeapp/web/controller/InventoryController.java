@@ -79,7 +79,7 @@ public class InventoryController {
 		return new ModelAndView("product", "model", myModel);
 	}
 
-	@RequestMapping(value = "/new",method=RequestMethod.GET)
+	@RequestMapping(value = "/new.html",method=RequestMethod.GET)
 	public String createProduct(ModelMap model) {
 
 		Product product = new Product();
@@ -100,19 +100,20 @@ public class InventoryController {
 	}
 	
 
-	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	@RequestMapping(value = "/save.html", method = RequestMethod.POST)
 	public String processSubmit(@ModelAttribute("product") Product product,@ModelAttribute("productDtl") ProductDtl productdtl,
 			BindingResult result, SessionStatus status) throws ProductNotSaveException, NoSuchNameException, NoSuchStatusException{
 		product.setProductDtls(productDtls);
 		logger.info(product.toString());
-		
+		logger.warn("execut product manager save");
+		System.out.println("excecute save");
 		product = productManager.saveProduct(product);
 		logger.info(product.toString());
 		return "createProduct";
 
 	}
 
-	@RequestMapping(value = "/addItem", method = RequestMethod.POST)
+	@RequestMapping(value = "/addItem.html", method = RequestMethod.POST)
 	public String addItemProduct(@ModelAttribute("product") Product product,
 			BindingResult result,ModelMap model) {
 //		ProductDtl dtl = new ProductDtl();
@@ -126,7 +127,7 @@ public class InventoryController {
 		return "createProductDetail";
 	}
 
-	@RequestMapping(value = "/deleteItem/{index}",method=RequestMethod.GET)
+	@RequestMapping(value = "/deleteItem/{index}.html",method=RequestMethod.GET)
 	@ResponseBody
 	public String deleteItem(@PathVariable int index,
 			HttpServletRequest request) {
@@ -140,7 +141,7 @@ public class InventoryController {
 		return index+"";
 	}
 
-	@RequestMapping(value = "/addItemAjax", method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_VALUE })
+	@RequestMapping(value = "/addItemAjax.html", method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_VALUE })
 	@ResponseBody
 	public ProductDtl addDtlProduct(@ModelAttribute("productDtl")ProductDtl productDtl,
 			BindingResult result) {

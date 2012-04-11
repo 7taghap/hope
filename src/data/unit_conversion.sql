@@ -16,6 +16,14 @@ CREATE TABLE `unit_conversion` (
 -- ----------------------------
 -- Records of unit_conversion
 -- ----------------------------
+
+--LOCK TABLES `unit_conversion` WRITE;
+/*!40000 ALTER TABLE `unit_conversion` DISABLE KEYS */;
+--INSERT INTO `unit_conversion` VALUES (1,'g',0.0001,'gram',1,1,NULL),(2,'kg',1,'Kilogram',1,1,NULL),(3,'ml',0.0001,'milliliter',1,2,NULL),(4,'l',1,'Liter',1,2,NULL),(5,'pc',1,'piece',1,3,NULL);
+/*!40000 ALTER TABLE `unit_conversion` ENABLE KEYS */;
+--UNLOCK TABLES;
+
+
 INSERT INTO `unit_conversion` VALUES ('1', 'g', '0.0001', 'gram', '1', '1');
 INSERT INTO `unit_conversion` VALUES ('2', 'kg', '1', 'Kilogram', '1', '1');
 INSERT INTO `unit_conversion` VALUES ('3', 'ml', '0.0001', 'milliliter', '1', '2');

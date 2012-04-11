@@ -28,19 +28,20 @@ public class ProductDaoImpl extends AbstractJpaDao<Integer, Product> implements 
 	@Transactional
 	public Product saveProduct(Product product) throws ProductNotSaveException{
 		try{
-			logger.info("before saving product" + product.toString());
+			System.out.println("before saving product" + product.toString());
 			if(product.getProductId() > 0) {
 				update(product);
 			}
 			else {
-				logger.info("saving product");
+				System.out.println("saving product");
 				
 				save(product);
-				logger.info("after save :" + product.getProductId());
-//				entityManager.flush();
+				System.out.println("after save :" + product.getProductId());
+//				entityManager.getTransaction().commit();
 			}
 		}catch(Exception e) {
-			throw new ProductNotSaveException("failed to save product");
+			e.printStackTrace();
+			throw new ProductNotSaveException();
 		}
 
 		return product;

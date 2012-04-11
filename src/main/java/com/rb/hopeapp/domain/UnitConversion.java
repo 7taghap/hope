@@ -36,7 +36,7 @@ public class UnitConversion implements Serializable {
 	private String name;
 
 	@OneToOne
-	@JoinColumn(name="status_id")
+	@JoinColumn(name="status")
 	private Status status;
 
 		
