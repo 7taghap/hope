@@ -22,7 +22,7 @@ import com.rb.hopeapp.repository.StatusDao;
 import com.rb.hopeapp.repository.UnitConversionDao;
 import com.rb.hopeapp.service.ProductManager;
 
-@Service
+//@Service
 public class ProductManagerImpl implements ProductManager{
 	static Logger logger = Logger.getLogger(ProductManagerImpl.class);
 	/**

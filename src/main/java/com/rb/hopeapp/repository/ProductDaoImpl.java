@@ -17,6 +17,7 @@ public class ProductDaoImpl extends AbstractJpaDao<Integer, Product> implements 
 
 	static Logger logger = Logger.getLogger(ProductDaoImpl.class);
 	public ProductDaoImpl() {
+//		super();
 		setClazz(Product.class);
 	}
 	
@@ -25,7 +26,7 @@ public class ProductDaoImpl extends AbstractJpaDao<Integer, Product> implements 
 		return findOne(id);
 	}
 	
-	@Transactional
+//	@Transactional
 	public Product saveProduct(Product product) throws ProductNotSaveException{
 		try{
 			System.out.println("before saving product" + product.toString());
@@ -34,14 +35,14 @@ public class ProductDaoImpl extends AbstractJpaDao<Integer, Product> implements 
 			}
 			else {
 				System.out.println("saving product");
-				
+				entityManager.getTransaction().begin();
 				save(product);
 				System.out.println("after save :" + product.getProductId());
-//				entityManager.getTransaction().commit();
+				entityManager.getTransaction().commit();
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
-			throw new ProductNotSaveException();
+			throw new ProductNotSaveException(e);
 		}
 
 		return product;

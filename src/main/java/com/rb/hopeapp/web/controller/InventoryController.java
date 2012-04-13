@@ -43,9 +43,13 @@ import com.rb.hopeapp.exception.NoCategoriesException;
 import com.rb.hopeapp.exception.NoSuchNameException;
 import com.rb.hopeapp.exception.NoSuchStatusException;
 import com.rb.hopeapp.exception.ProductNotSaveException;
+import com.rb.hopeapp.repository.ProductCategoryDao;
 import com.rb.hopeapp.repository.ProductDao;
+import com.rb.hopeapp.repository.StatusDao;
+import com.rb.hopeapp.repository.UnitConversionDao;
 import com.rb.hopeapp.repository.UserDao;
 import com.rb.hopeapp.service.ProductManager;
+import com.rb.hopeapp.service.impl.ProductManagerImpl;
 
 @Controller
 @SessionAttributes
@@ -55,11 +59,22 @@ public class InventoryController {
 	private static final Logger logger = Logger
 			.getLogger(InventoryController.class);
 
-	@Autowired
-	ProductManager productManager;
+//	@Autowired
+//	ProductManager productManager;
 	
 //	@Autowired
 //	ServletContext contex;
+	@Autowired
+	ProductDao productDao;
+	
+	@Autowired
+	UnitConversionDao unitConversionDao;
+	
+	@Autowired
+	ProductCategoryDao productCategoryDao;
+	
+	@Autowired
+	StatusDao statusDao;
 
 	List<ProductDtl> productDtls = new AutoPopulatingList(ProductDtl.class);
 
@@ -74,8 +89,9 @@ public class InventoryController {
 		// List<Product> products = this.productManager.getProducts();
 		// Product product = this.productManager.getProduct(1000);
 		// myModel.put("products", products );
-		List<UnitConversion> units = productManager.getUnitConversions();
-		myModel.put("units", units);
+//		List<UnitConversion> units = productManager.getUnitConversions();
+
+//		myModel.put("units", units);
 		return new ModelAndView("product", "model", myModel);
 	}
 
@@ -107,7 +123,8 @@ public class InventoryController {
 		logger.info(product.toString());
 		logger.warn("execut product manager save");
 		System.out.println("excecute save");
-		product = productManager.saveProduct(product);
+//		product = productManager.saveProduct(product);
+		product = productDao.saveProduct(product);
 		logger.info(product.toString());
 		return "createProduct";
 
@@ -158,12 +175,23 @@ public class InventoryController {
 	@ModelAttribute("productCategories")
 	public List<String> populateProductCategories()
 			throws NoCategoriesException {
-		return productManager.getProductCategories();
+//		return productManager.getProductCategories();
+		List<String> categories = new ArrayList<String>();
+		for (ProductCategory category :productCategoryDao.getProductCategories()) {
+			categories.add(category.getCategoryName());
+		}
+		return categories;
 	}
 
 	@ModelAttribute("unitlist")
 	public List<String> populateUnitList() {
-		return productManager.getUnitList();
+//		return productManager.getUnitList();
+		List<String> units = new ArrayList<String>();
+		for (UnitConversion unit : unitConversionDao.getAllUnitConversion()) {
+			units.add(unit.getName());
+			
+		}
+		return units;
 	}
 	// @ModelAttribute("productDtls")
 	// public List<ProductDtl> initializeProductDtls() {

@@ -3,9 +3,9 @@
 	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence 	http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
 
-	<persistence-unit name="MyPersistentUnit" transaction-type="RESOURCE_LOCAL">
+		<persistence-unit name="MyPersistentUnit">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<!-- <jta-data-source>jdbc/myRedhorse</jta-data-source> -->
+		<jta-data-source>java:jboss/MySqlDSJNDI</jta-data-source>
 		<class>com.rb.hopeapp.domain.User</class>
 		<class>com.rb.hopeapp.domain.UnitConversion</class>
 		<class>com.rb.hopeapp.domain.Product</class>
@@ -16,7 +16,12 @@
 	
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="update" />
-			<!-- <property name="hibernate.show_sql" value="false" /> -->
+			
+			<!-- transaction look up for jboss  -->	
+<!-- 			<property name="hibernate.transaction.manager_lookup_class" -->
+<!-- 				value="org.hibernate.transaction.JBossTransactionManagerLookup" /> -->
+		
+			<property name="hibernate.show_sql" value="true" />
 
 			<!-- HSQL DB Connection properties uncomment this file if you use HSQL 
 				DB -->
@@ -29,27 +34,25 @@
 
 
 			<!-- MySQL DB connection properties -->
-			<!-- <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" 
-				/> -->
-			<!-- <property name="hibernate.connection.url" value="jdbc:mysql://BFX3SM1:3306/redhorse" 
-				/> -->
-			<!-- <property name="hibernate.connection.username" value="redhorse" /> -->
-			<!-- <property name="hibernate.connection.password" value="redhor$3" /> -->
+<!-- 			 <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" /> -->
+				
+<!-- 			 <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/redhorse"/>  -->
+				
+<!-- 			 <property name="hibernate.connection.username" value="root" />  -->
+<!-- 			 <property name="hibernate.connection.password" value="root" />  -->
 
 
 			<!-- hibernate dialect -->
 			<!-- <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" 
 				/> -->
-			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+<!-- 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" /> -->
 
-			<!-- Echo all executed SQL to stdout -->
-			<property name="show_sql" value="true" />
 
-			<property name="hibernate.c3p0.min_size" value="5" />
-			<property name="hibernate.c3p0.max_size" value="20" />
-			<property name="hibernate.c3p0.timeout" value="300" />
-			<property name="hibernate.c3p0.max_statements" value="50" />
-			<property name="hibernate.c3p0.idle_test_period" value="3000" />
+<!-- 			<property name="hibernate.c3p0.min_size" value="5" /> -->
+<!-- 			<property name="hibernate.c3p0.max_size" value="20" /> -->
+<!-- 			<property name="hibernate.c3p0.timeout" value="300" /> -->
+<!-- 			<property name="hibernate.c3p0.max_statements" value="50" /> -->
+<!-- 			<property name="hibernate.c3p0.idle_test_period" value="3000" /> -->
 
 		</properties>
 
