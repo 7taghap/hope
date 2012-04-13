@@ -5,7 +5,15 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.support.PropertiesBeanDefinitionReader;
+import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
+import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.GenericApplicationContext;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.rb.hopeapp.domain.Product;
 import com.rb.hopeapp.domain.ProductCategory;
@@ -18,32 +26,45 @@ import com.rb.hopeapp.exception.NoSuchStatusException;
 import com.rb.hopeapp.exception.ProductNotSaveException;
 import com.rb.hopeapp.repository.ProductCategoryDao;
 import com.rb.hopeapp.repository.ProductDao;
+import com.rb.hopeapp.repository.ProductDaoImpl;
 import com.rb.hopeapp.repository.StatusDao;
 import com.rb.hopeapp.repository.UnitConversionDao;
 import com.rb.hopeapp.service.ProductManager;
 
-//@Service
+@Service("productService")
 public class ProductManagerImpl implements ProductManager{
 	static Logger logger = Logger.getLogger(ProductManagerImpl.class);
+	
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
-	ProductDao productDao;
+	@Qualifier("productDao")
+	ProductDao productDaoImpl;
 	
 	@Autowired
+	@Qualifier("unitConversionDao")
 	UnitConversionDao unitConversionDao;
 	
 	@Autowired
+	@Qualifier("productCategoryDao")
 	ProductCategoryDao productCategoryDao;
 	
 	@Autowired
 	StatusDao statusDao;
+	
+//	public ProductManagerImpl() {
+//	     XmlBeanFactory beanFactory= new XmlBeanFactory(new ClassPathResource("WEB-INF/applicationContext.xml"));  // load your beans
+//
+//		 
+//		 productDaoImpl = (ProductDaoImpl) beanFactory.getBean("productDao");
+//	}
 
 	public List<Product> getProducts()  {
-		return productDao.findByCategory("beverages");
+		return productDaoImpl.findByCategory("beverages");
 	}
 
 	public void setProducts(List<Product> products) {
@@ -52,7 +73,7 @@ public class ProductManagerImpl implements ProductManager{
 	}
 
 	public Product getProduct(int id) {
-		return productDao.findById(id);
+		return productDaoImpl.findById(id);
 	}
 
 	public List<UnitConversion> getUnitConversions() {
@@ -112,7 +133,7 @@ public class ProductManagerImpl implements ProductManager{
 //		product.setstatusDao.getActive();
 		product.setProductDtls(productDtls);
 		logger.info("exccute save");
-		product = productDao.saveProduct(product);
+		product = productDaoImpl.saveProduct(product);
 		
 		return product;
 	}

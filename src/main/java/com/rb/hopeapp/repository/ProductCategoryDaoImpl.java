@@ -10,7 +10,7 @@ import com.rb.hopeapp.domain.namedqueries.NamedQueriesParam;
 import com.rb.hopeapp.domain.namedqueries.ProductCategoryNamedQueries;
 import com.rb.hopeapp.exception.NoSuchNameException;
 
-@Repository
+@Repository("productCategoryDao")
 public class ProductCategoryDaoImpl extends AbstractJpaDao<Integer, ProductCategory> 
 implements ProductCategoryDao{
 

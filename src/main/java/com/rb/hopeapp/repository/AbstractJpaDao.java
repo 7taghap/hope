@@ -15,7 +15,7 @@ public abstract class AbstractJpaDao< K,T extends Serializable > {
 	   
 	   EntityManager entityManager;
 	 
-	   @PersistenceContext(type=PersistenceContextType.EXTENDED, unitName="MyPersistentUnit")
+	   @PersistenceContext(unitName="MyPersistentUnit")
 	   public void setEntityManager(EntityManager entityManager) {
 		   this.entityManager = entityManager;
 	   }

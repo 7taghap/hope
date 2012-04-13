@@ -4,12 +4,16 @@
 	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:lang="http://www.springframework.org/schema/lang"
 	xmlns:p="http://www.springframework.org/schema/p" xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
 		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.1.xsd
 		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+
+<!-- 	<context:component-scan base-package="com.rb.hopeapp" /> -->
 
 
 
@@ -35,11 +39,11 @@
 
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-		 <property name="persistenceXmlLocation" value="classpath:/META-INF/mypersistence.xml"/> 
+<!-- 		 <property name="persistenceXmlLocation" value="classpath:/META-INF/mypersistence.xml"/>  -->
 		<property name="persistenceUnitName" value="MyPersistentUnit" />
 		<property name="dataSource" ref="datasource" />
 		<!-- auto scan entity annotation, if persistence.xml is not defined -->
-<!-- 		<property name="packagesToScan" value="com.rb.hopeapp" /> -->
+		<property name="packagesToScan" value="com.rb.hopeapp" />
 		<property name="jpaVendorAdapter" ref="jpaVendorAdapter" />
 		<property name="jpaPropertyMap">
 			<map>
@@ -54,7 +58,7 @@
 	<bean id="txManager"  class="org.springframework.orm.jpa.JpaTransactionManager">
 		
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
- 		<property name="dataSource" ref="datasource" />  <!-- is this required? it's already ref in entitymanager -->
+<!--  		<property name="dataSource" ref="datasource" />  is this required? it's already ref in entitymanager -->
 	</bean>
 
 
@@ -71,6 +75,14 @@
 		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
 	<bean
 		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+
+
+	<!--  to be transfered to another xml file -->
+	 <!--  dao bean definition -->
+	<bean id="productDao" class="com.rb.hopeapp.repository.ProductDaoImpl"/>
+	<bean id="productCategoryDao"  class="com.rb.hopeapp.repository.ProductCategoryDaoImpl"/>
+	<bean id="unitConversionDao"  class="com.rb.hopeapp.repository.UnitConversionDaoImpl"/>
+<!-- 	<bean id="productService" class="com.rb.hopeapp.service.impl.ProductManagerImpl"/> -->
 
 </beans>
 

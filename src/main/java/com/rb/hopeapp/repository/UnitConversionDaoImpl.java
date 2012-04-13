@@ -11,7 +11,7 @@ import com.rb.hopeapp.domain.namedqueries.UnitConversionNameQueries;
 import com.rb.hopeapp.exception.NoSuchNameException;
 
 
-@Repository
+@Repository("unitConversionDao")
 public class UnitConversionDaoImpl extends
 		AbstractJpaDao<Integer, UnitConversion> implements UnitConversionDao {
 

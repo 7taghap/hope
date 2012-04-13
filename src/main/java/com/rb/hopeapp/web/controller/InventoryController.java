@@ -19,6 +19,7 @@ import org.apache.log4j.Logger;
 import org.aspectj.apache.bcel.generic.AllocationInstruction;
 import org.pojomatic.Pojomatic;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -59,22 +60,23 @@ public class InventoryController {
 	private static final Logger logger = Logger
 			.getLogger(InventoryController.class);
 
-//	@Autowired
-//	ProductManager productManager;
+	@Autowired
+	@Qualifier("productService")
+	ProductManager productService;
 	
 //	@Autowired
 //	ServletContext contex;
-	@Autowired
-	ProductDao productDao;
-	
-	@Autowired
-	UnitConversionDao unitConversionDao;
-	
-	@Autowired
-	ProductCategoryDao productCategoryDao;
-	
-	@Autowired
-	StatusDao statusDao;
+//	@Autowired
+//	ProductDao productDao;
+//	
+//	@Autowired
+//	UnitConversionDao unitConversionDao;
+//	
+//	@Autowired
+//	ProductCategoryDao productCategoryDao;
+//	
+//	@Autowired
+//	StatusDao statusDao;
 
 	List<ProductDtl> productDtls = new AutoPopulatingList(ProductDtl.class);
 
@@ -123,8 +125,8 @@ public class InventoryController {
 		logger.info(product.toString());
 		logger.warn("execut product manager save");
 		System.out.println("excecute save");
-//		product = productManager.saveProduct(product);
-		product = productDao.saveProduct(product);
+		product = productService.saveProduct(product);
+//		product = productDao.saveProduct(product);
 		logger.info(product.toString());
 		return "createProduct";
 
@@ -175,23 +177,23 @@ public class InventoryController {
 	@ModelAttribute("productCategories")
 	public List<String> populateProductCategories()
 			throws NoCategoriesException {
-//		return productManager.getProductCategories();
-		List<String> categories = new ArrayList<String>();
-		for (ProductCategory category :productCategoryDao.getProductCategories()) {
-			categories.add(category.getCategoryName());
-		}
-		return categories;
+		return productService.getProductCategories();
+//		List<String> categories = new ArrayList<String>();
+//		for (ProductCategory category :productCategoryDao.getProductCategories()) {
+//			categories.add(category.getCategoryName());
+//		}
+//		return categories;
 	}
 
 	@ModelAttribute("unitlist")
 	public List<String> populateUnitList() {
-//		return productManager.getUnitList();
-		List<String> units = new ArrayList<String>();
-		for (UnitConversion unit : unitConversionDao.getAllUnitConversion()) {
-			units.add(unit.getName());
-			
-		}
-		return units;
+		return productService.getUnitList();
+//		List<String> units = new ArrayList<String>();
+//		for (UnitConversion unit : unitConversionDao.getAllUnitConversion()) {
+//			units.add(unit.getName());
+//			
+//		}
+//		return units;
 	}
 	// @ModelAttribute("productDtls")
 	// public List<ProductDtl> initializeProductDtls() {
