@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.rb.hopeapp.domain.Product;
 import com.rb.hopeapp.domain.ProductCategory;
@@ -30,17 +31,26 @@ public class ProductManagerImpl implements ProductManager{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Autowired
+//	@Autowired
 	ProductDao productDao;
 	
-	@Autowired
+//	@Autowired
 	UnitConversionDao unitConversionDao;
 	
-	@Autowired
+//	@Autowired
 	ProductCategoryDao productCategoryDao;
 	
-	@Autowired
+//	@Autowired
 	StatusDao statusDao;
+
+	public ProductManagerImpl(ProductDao productDao, UnitConversionDao unitDao,
+			ProductCategoryDao categoryDao,
+			StatusDao statusDao) {
+		this.productDao = productDao;
+		this.unitConversionDao = unitDao;
+		this.productCategoryDao = categoryDao;
+		this.statusDao = statusDao;
+	}
 
 	public List<Product> getProducts()  {
 		return productDao.findByCategory("beverages");
@@ -78,6 +88,7 @@ public class ProductManagerImpl implements ProductManager{
 		return units;
 	}
 
+	@Transactional
 	public Product saveProduct(Product product) throws ProductNotSaveException,
 	NoSuchNameException, NoSuchStatusException {
 		System.out.println("save invoke");

@@ -28,7 +28,7 @@ public class UserDaoImpl extends AbstractJpaDao<Integer,User> implements UserDao
 	public User findById(int userId) {
 		try {
 //			em = entityManagerFactory.createEntityManager();
-			logger.info("entity manager :" + entityManager);
+//			logger.info("entity manager :" + entityManager);
 //			User user = (User)entityManager.createNamedQuery("User.findById").setParameter("userId", userId).getSingleResult();
 			User user = getById(userId);
 //			User user = new User();

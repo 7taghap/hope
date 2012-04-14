@@ -8,16 +8,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.naming.Context;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
-import org.aspectj.apache.bcel.generic.AllocationInstruction;
-import org.pojomatic.Pojomatic;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -55,11 +49,12 @@ public class InventoryController {
 	private static final Logger logger = Logger
 			.getLogger(InventoryController.class);
 
-	@Autowired
+
 	ProductManager productManager;
-	
-//	@Autowired
-//	ServletContext contex;
+
+	public InventoryController(ProductManager productManager) {
+		this.productManager = productManager;
+	}
 
 	List<ProductDtl> productDtls = new AutoPopulatingList(ProductDtl.class);
 

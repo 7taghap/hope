@@ -8,29 +8,59 @@
 	<name>hope</name>
 	<description>mvc spring version of hope			</description>
 
-
 	<properties>
+		<!-- VERSIONS -->
+		<spring.version>3.1.1.RELEASE</spring.version> <!-- 3.1.0.BUILD-SNAPSHOT -->
+		<spring-security.version>3.1.0.RELEASE</spring-security.version>
+		<javassist.version>3.15.0-GA</javassist.version>
+		<cglib.version>2.2.2</cglib.version>
 
-		<!-- GWT needs at least java 1.5 -->
-		<webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<org.springframework.version>3.1.1.RELEASE</org.springframework.version>
-		<org.hibernate.version>3.6.9.Final</org.hibernate.version>
-		<log4j.version>1.2.14</log4j.version>
+		<commons-lang3.version>3.2-SNAPSHOT</commons-lang3.version>
+		<guava.version>11.0.2</guava.version>
+
+		<jackson-mapper-asl.version>1.9.5</jackson-mapper-asl.version>
+		<jaxb-api.version>2.2.6</jaxb-api.version>
+
+		<!-- VERSIONS - persistence -->
+		<mysql-connector-java.version>5.1.18</mysql-connector-java.version> <!-- latest version on: 02.10.2011 - http://dev.mysql.com/downloads/connector/j/ -->
+		<hibernate.version>4.1.0.Final</hibernate.version>
+		<commons-dbcp.version>1.4</commons-dbcp.version>
+		<querydsl.version>2.3.2</querydsl.version>
+
+		<!-- VERSIONS - logging -->
+		<org.slf4j.version>1.6.4</org.slf4j.version>
+
+		<!-- VERSIONS - testing -->
+		<org.hamcrest.version>1.3.RC2</org.hamcrest.version>
+		<junit.version>4.10</junit.version>
+		<mockito.version>1.9.0</mockito.version>
+
+		<http.version>4.1.4</http.version>
+		<httpclient.version>4.1.3</httpclient.version>
+
 	</properties>
 	<dependencies>
-		<dependency>
+
+	<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>1.5.3</version>
-			<!-- Marshalling JSON -->
+			<!--  Marshalling JSON -->
 		</dependency>
+
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib-nodep</artifactId>
+			<version>2.1_3</version>
+		</dependency>
+
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 			<version>2.5</version>
 			<scope>provided</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
@@ -66,133 +96,110 @@
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time-jsptags</artifactId>
 			<version>1.0.1</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>jsp-api</artifactId>
-					<groupId>javax.servlet</groupId>
-				</exclusion>
-			</exclusions>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
-			<version>${org.springframework.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.validation</groupId>
-			<artifactId>validation-api</artifactId>
-			<version>1.0.0.GA</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>javax.validation</groupId>
-			<artifactId>validation-api</artifactId>
-			<version>1.0.0.GA</version>
-			<classifier>sources</classifier>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-orm</artifactId>
-			<version>${org.springframework.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId>
-			<version>${org.springframework.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-jdbc</artifactId>
-			<version>${org.springframework.version}</version>
+			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-beans</artifactId>
-			<version>${org.springframework.version}</version>
+			<version>${spring.version}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>${org.springframework.version}</version>
+			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+			<!-- DAO Support -->
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
-			<version>${org.springframework.version}</version>
+			<version>${spring.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
-			<version>${org.springframework.version}</version>
+			<version>${spring.version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-oxm</artifactId>
-			<version>${org.springframework.version}</version>
+			<version>${spring.version}</version>
 			<!-- Marhsalling/Unmarhalling XML -->
 		</dependency>
-		<!-- <dependency> -->
-		<!-- <groupId>org.springframework.security</groupId> -->
-		<!-- <artifactId>spring-security-config</artifactId> -->
-		<!-- <version>3.0.5.RELEASE</version> -->
-		<!-- </dependency> -->
-		<!-- <dependency> -->
-		<!-- <groupId>org.springframework.security</groupId> -->
-		<!-- <artifactId>spring-security-web</artifactId> -->
-		<!-- <version>3.0.5.RELEASE</version> -->
-		<!-- </dependency> -->
+
 		<dependency>
-			<groupId>cglib</groupId>
-			<artifactId>cglib</artifactId>
-			<version>2.2.2</version>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.0.0.GA</version>
 		</dependency>
-		<!-- hibernate default -->
+
 		<dependency>
 			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>${org.hibernate.version}</version>
+			<artifactId>hibernate</artifactId>
+			<version>3.2.5.ga</version>
 		</dependency>
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.hibernate</groupId> -->
-<!-- 			<artifactId>hibernate-annotations</artifactId> -->
-<!-- 			<version>${org.hibernate.version}</version> -->
-<!-- 		</dependency> -->
+
 		<dependency>
 			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>${org.hibernate.version}</version>
+			<artifactId>hibernate-annotations</artifactId>
+			<version>3.3.0.ga</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-commons-annotations</artifactId>
+			<version>3.3.0.ga</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
-			<version>4.2.0.Final</version>
+			<version>4.1.0.Final</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.pojomatic</groupId>
-			<artifactId>pojomatic</artifactId>
-			<version>1.0</version>
-			<!-- equals/hashCode/toString support -->
-		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.5.8</version>
+			<version>1.5.2</version>
 		</dependency>
-		<dependency>
-			<groupId>c3p0</groupId>
-			<artifactId>c3p0</artifactId>
-			<version>0.9.1.2</version>
-		</dependency>
-
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.18</version>
-			<scope>compile</scope>
+			<version>${mysql-connector-java.version}</version>
+			<scope>runtime</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>javax.transaction</groupId>
+			<artifactId>jta</artifactId>
+			<version>1.1</version>
+		</dependency>
+
 		<dependency>
 			<groupId>displaytag</groupId>
 			<artifactId>displaytag</artifactId>
@@ -222,150 +229,51 @@
 			<artifactId>dozer</artifactId>
 			<version>3.3.1</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.pojomatic</groupId>
+			<artifactId>pojomatic</artifactId>
+			<version>1.0</version>
+			<!-- equals/hashCode/toString support -->
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
-			<version>${org.springframework.version}</version>
+			<version>${spring.version}</version>
 			<scope>test</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
 			<version>1.8.0</version>
 			<scope>test</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.8.2</version>
 			<scope>test</scope>
 		</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-			</plugin>
-			<!-- jboss plugin -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>jboss-maven-plugin</artifactId>
-				<version>1.5.0</version>
-				<configuration>
-					<jbossHome>/host/jboss/jboss-as-7.1.0.CR1b</jbossHome>
-					<serverName>all</serverName>
-					<fileName>target/hopeapp.war</fileName>
-				</configuration>
-			</plugin>
-
-
-			<!-- jetty plubin -->
-			<plugin>
-				<groupId>org.mortbay.jetty</groupId>
-				<artifactId>maven-jetty-plugin</artifactId>
-				<version>6.1.21</version>
-				<configuration>
-					<connectors>
-						<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
-							<port>8888</port>
-							<maxIdleTime>60000</maxIdleTime>
-
-						</connector>
-					</connectors>
-					<contextPath>/</contextPath>
-					<scanIntervalSeconds>10</scanIntervalSeconds>
-				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>log4j</groupId>
-						<artifactId>log4j</artifactId>
-						<version>${log4j.version}</version>
-					</dependency>
-				</dependencies>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-
+				<version>2.12</version>
 				<configuration>
 					<excludes>
-						<exclude>**/*IntegrationTest.java</exclude>
+						<exclude>**/*RESTIntegrationTest.java</exclude>
 					</excludes>
+					<systemPropertyVariables>
+						<persistenceTarget>h2</persistenceTarget>
+					</systemPropertyVariables>
 				</configuration>
-
-				<!-- Dont run integration test in Test(s) phase -->
-				<executions>
-					<execution>
-						<id>integration-tests</id>
-						<phase>integration-test</phase>
-						<goals>
-							<goal>test</goal>
-						</goals>
-						<configuration>
-							<skip>false</skip>
-							<excludes>
-								<exclude>none</exclude>
-							</excludes>
-							<includes>
-								<include>**/*IntegrationTest.java</include>
-							</includes>
-						</configuration>
-					</execution>
-				</executions>
 			</plugin>
-			<plugin>
-				<groupId>org.codehaus.cargo</groupId>
-				<artifactId>cargo-maven2-plugin</artifactId>
-				<version>1.0.1-alpha-2</version>
-				<configuration>
-					<wait>false</wait>
-					<container>
-						<containerId>jetty6x</containerId>
-						<type>embedded</type>
-						<systemProperties>
-							<org.apache.commons.logging.Log>
-								org.apache.commons.logging.impl.SimpleLog
-							</org.apache.commons.logging.Log>
-						</systemProperties>
-					</container>
-					<configuration>
-						<properties>
-							<cargo.servlet.port>9091</cargo.servlet.port>
-						</properties>
-						<deployables>
-							<deployable>
-								<groupId>com.rb.hopeapp</groupId>
-								<artifactId>hope</artifactId>
-								<type>war</type>
-								<properties>
-									<context>/</context>
-								</properties>
-								<pingURL>
-									http://localhost:9091/IntegrationTest
-								</pingURL>
-							</deployable>
-						</deployables>
-					</configuration>
-				</configuration>
-				<executions>
-					<execution>
-						<id>start-container</id>
-						<phase>pre-integration-test</phase>
-						<goals>
-							<goal>start</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>stop-container</id>
-						<phase>post-integration-test</phase>
-						<goals>
-							<goal>stop</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -373,6 +281,25 @@
 				<configuration>
 					<source>1.6</source>
 					<target>1.6</target>
+					<compilerArgument>-proc:none</compilerArgument>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.cargo</groupId>
+				<artifactId>cargo-maven2-plugin</artifactId>
+				<version>1.2.0</version>
+				<configuration>
+					<wait>true</wait>
+					<container>
+						<containerId>jetty7x</containerId>
+						<type>embedded</type>
+					</container>
+					<configuration>
+						<properties>
+							<cargo.servlet.port>8888</cargo.servlet.port>
+						</properties>
+					</configuration>
 				</configuration>
 			</plugin>
 
