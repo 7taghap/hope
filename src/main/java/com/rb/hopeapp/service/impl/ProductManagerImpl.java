@@ -4,16 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.support.PropertiesBeanDefinitionReader;
-import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
-import org.springframework.beans.factory.xml.XmlBeanFactory;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.GenericApplicationContext;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.stereotype.Service;
+import org.joda.time.DateTime;
 import org.springframework.transaction.annotation.Transactional;
+
+
 
 import com.rb.hopeapp.domain.Product;
 import com.rb.hopeapp.domain.ProductCategory;
@@ -27,11 +21,13 @@ import com.rb.hopeapp.exception.ProductNotSaveException;
 import com.rb.hopeapp.repository.ProductCategoryDao;
 import com.rb.hopeapp.repository.ProductDao;
 import com.rb.hopeapp.repository.ProductDaoImpl;
+import com.rb.hopeapp.repository.ProductDtlDao;
 import com.rb.hopeapp.repository.StatusDao;
 import com.rb.hopeapp.repository.UnitConversionDao;
 import com.rb.hopeapp.service.ProductManager;
+import com.rb.hopeapp.util.AppUtil;
 
-@Service("productService")
+//@Service("productService")
 public class ProductManagerImpl implements ProductManager{
 	static Logger logger = Logger.getLogger(ProductManagerImpl.class);
 	
@@ -41,30 +37,17 @@ public class ProductManagerImpl implements ProductManager{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Autowired
-	@Qualifier("productDao")
-	ProductDao productDaoImpl;
 	
-	@Autowired
-	@Qualifier("unitConversionDao")
-	UnitConversionDao unitConversionDao;
+	private ProductDao productDao;
+	private UnitConversionDao unitConversionDao;
+	private StatusDao statusDao;
+	private ProductCategoryDao productCategoryDao;
+	private ProductDtlDao productDtlDao;
 	
-	@Autowired
-	@Qualifier("productCategoryDao")
-	ProductCategoryDao productCategoryDao;
-	
-	@Autowired
-	StatusDao statusDao;
-	
-//	public ProductManagerImpl() {
-//	     XmlBeanFactory beanFactory= new XmlBeanFactory(new ClassPathResource("WEB-INF/applicationContext.xml"));  // load your beans
-//
-//		 
-//		 productDaoImpl = (ProductDaoImpl) beanFactory.getBean("productDao");
-//	}
+
 
 	public List<Product> getProducts()  {
-		return productDaoImpl.findByCategory("beverages");
+		return productDao.findByCategory("beverages");
 	}
 
 	public void setProducts(List<Product> products) {
@@ -73,7 +56,7 @@ public class ProductManagerImpl implements ProductManager{
 	}
 
 	public Product getProduct(int id) {
-		return productDaoImpl.findById(id);
+		return productDao.findById(id);
 	}
 
 	public List<UnitConversion> getUnitConversions() {
@@ -99,6 +82,7 @@ public class ProductManagerImpl implements ProductManager{
 		return units;
 	}
 
+	@Transactional
 	public Product saveProduct(Product product) throws ProductNotSaveException,
 	NoSuchNameException, NoSuchStatusException {
 		System.out.println("save invoke");
@@ -126,17 +110,81 @@ public class ProductManagerImpl implements ProductManager{
 				UnitConversion unit = unitConversionDao.findByName(productDtl.getUnitConversion().getName());
 				logger.info("unit for product dtl:"+ unit.toString());
 				productDtl.setUnitConversion(unit);
-//				productDtl.set
+				productDtl.setCreatedBy(AppUtil.getInstance().getInstance().getUser());
+				productDtl.setLastUpdatedBy(AppUtil.getInstance().getInstance().getUser());
+				productDtl.setLastUpdatedDate(AppUtil.getInstance().getCurrentDate());
 				productDtls.add(productDtl);
+				
 			}
 		}
-//		product.setstatusDao.getActive();
+		product.setCreatedDate(AppUtil.getInstance().getCurrentDate());
+		product.setUpdateDate(AppUtil.getInstance().getCurrentDate());
+		product.setCreatedBy(AppUtil.getInstance().getInstance().getUser());
+		product.setUpdateBy(AppUtil.getInstance().getInstance().getUser());
 		product.setProductDtls(productDtls);
 		logger.info("exccute save");
-		product = productDaoImpl.saveProduct(product);
+		product = productDao.saveProduct(product);
 		
 		return product;
 	}
+	
+	public double computeProductTotalQtyOnHand(Product product) throws NoSuchNameException {
+		double totalQtyonHand=0;
+		logger.info(product.getProductDtls().toString());
+		if (product.getProductDtls()!=null) {
+			for (ProductDtl dtl : product.getProductDtls()) {
+				UnitConversion unit = unitConversionDao.findByName(dtl.getUnitConversion().getName());
+				totalQtyonHand += dtl.getQtyOnHand() * unit.getFactor();
+			}
+		}
+		return totalQtyonHand;
+	}
+
+	public List<ProductDtl> getProductDtls() {
+		return productDtlDao.findAll();
+	}
+
+	
+	/******************** setters and getters ***********************/
+	public ProductDao getProductDao() {
+		return productDao;
+	}
+
+	public void setProductDao(ProductDao productDao) {
+		this.productDao = productDao;
+	}
+
+	public UnitConversionDao getUnitConversionDao() {
+		return unitConversionDao;
+	}
+
+	public void setUnitConversionDao(UnitConversionDao unitConversionDao) {
+		this.unitConversionDao = unitConversionDao;
+	}
+
+	public ProductCategoryDao getProductCategoryDao() {
+		return productCategoryDao;
+	}
+
+	public void setProductCategoryDao(ProductCategoryDao productCategoryDao) {
+		this.productCategoryDao = productCategoryDao;
+	}
+
+	public StatusDao getStatusDao() {
+		return statusDao;
+	}
+
+	public void setStatusDao(StatusDao statusDao) {
+		this.statusDao = statusDao;
+	}
+	public ProductDtlDao getProductDtlDao() {
+		return productDtlDao;
+	}
+
+	public void setProductDtlDao(ProductDtlDao productDtlDao) {
+		this.productDtlDao = productDtlDao;
+	}
+
 	
 	
 

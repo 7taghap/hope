@@ -18,6 +18,9 @@
 		<url-pattern>*.html</url-pattern>
 	</servlet-mapping>
 
+<!-- Enables Spring Security -->
+ 
+    <!--  view filter -->
 	<filter>
 		<filter-name>sitemesh</filter-name>
 		<filter-class>com.opensymphony.module.sitemesh.filter.PageFilter</filter-class>

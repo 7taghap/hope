@@ -82,7 +82,16 @@
 	<bean id="productDao" class="com.rb.hopeapp.repository.ProductDaoImpl"/>
 	<bean id="productCategoryDao"  class="com.rb.hopeapp.repository.ProductCategoryDaoImpl"/>
 	<bean id="unitConversionDao"  class="com.rb.hopeapp.repository.UnitConversionDaoImpl"/>
-<!-- 	<bean id="productService" class="com.rb.hopeapp.service.impl.ProductManagerImpl"/> -->
+	<bean id="statusDao" class="com.rb.hopeapp.repository.StatusDaoImpl"/>
+	<bean id="productDtlDao" class="com.rb.hopeapp.repository.ProductDtlDaoImpl"/>
+
+	<bean id="productService" class="com.rb.hopeapp.service.impl.ProductManagerImpl">
+		<property name="productCategoryDao" ref="productCategoryDao"/>
+		<property name="unitConversionDao" ref="unitConversionDao"/>
+		<property name="statusDao" ref="statusDao"/>
+		<property name="productDao" ref="productDao"/>
+		<property name="productDtlDao" ref="productDtlDao"/>
+	</bean>
 
 </beans>
 

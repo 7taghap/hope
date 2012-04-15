@@ -32,11 +32,11 @@ public class Status implements Serializable {
 
 	private String category;
 
-	@Column(name = "created_by")
+	@Column(name = "created_by",updatable=false)
 	private String createdBy;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "created_date")
+	@Column(name = "created_date",updatable=false)
 	private Date createdDate;
 
 	@Column(name = "last_updated_by")

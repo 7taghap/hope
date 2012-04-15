@@ -39,11 +39,11 @@ public class Product implements Serializable {
 	@JoinColumn(name="product_category_id")
 	private ProductCategory category;
 
-	@Column(name = "created_by")
+	@Column(name = "created_by",updatable=false)
 	private String createdBy;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "created_date")
+	@Column(name = "created_date",updatable=false)
 	private Date createdDate;
 
 	private String imgfile;
@@ -75,7 +75,7 @@ public class Product implements Serializable {
 	private UnitConversion unitConversion;
 
 	// bi-directional many-to-one association to ProductDtl
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "product_id")
 	private List<ProductDtl> productDtls;
 

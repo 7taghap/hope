@@ -25,11 +25,11 @@ public class User implements Serializable {
 	@Column(name="user_id")
 	private int userId;
 
-	@Column(name="created_by")
+	@Column(name="created_by",updatable=false)
 	private String createdBy;
 
     @Temporal( TemporalType.TIMESTAMP)
-	@Column(name="created_date")
+	@Column(name="created_date",updatable=false)
 	private Date createdDate;
 
     @Temporal( TemporalType.TIMESTAMP)

@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.rb.hopeapp.domain.Product;
 import com.rb.hopeapp.domain.ProductCategory;
+import com.rb.hopeapp.domain.ProductDtl;
 import com.rb.hopeapp.domain.UnitConversion;
 import com.rb.hopeapp.exception.NoCategoriesException;
 import com.rb.hopeapp.exception.NoSuchNameException;
@@ -21,5 +22,8 @@ public interface ProductManager extends Serializable {
     public List<String> getUnitList();
     public Product saveProduct(Product product) throws ProductNotSaveException,
     NoSuchNameException,NoSuchStatusException;
+
+    public List<ProductDtl> getProductDtls();
+    public double computeProductTotalQtyOnHand(Product product) throws NoSuchNameException;
     
 }

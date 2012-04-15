@@ -33,11 +33,11 @@ public class ProductDtl implements Serializable {
 	@Column(name="dtl_name")
 	private String productDtlName;
 
-	@Column(name="created_by")
+	@Column(name="created_by",updatable=false)
 	private String createdBy;
 
     @Temporal( TemporalType.TIMESTAMP)
-	@Column(name="created_date")
+	@Column(name="created_date",updatable=false)
 	private Date createdDate;
 
 	@Column(name="last_updated_by")
@@ -66,7 +66,7 @@ public class ProductDtl implements Serializable {
 	private Double sugPrice;
 
 	//bi-directional many-to-one association to UnitConversion
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="package_type")
 	private UnitConversion unitConversion;
 

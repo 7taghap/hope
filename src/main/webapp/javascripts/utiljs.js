@@ -43,18 +43,29 @@ $.fn.removeRow = function(index) {
 	
 }
 
+$.fn.getSumOfRow = function(row) {
+	var total =	0;
+	$(this).find('tbody tr').each(function (i) {
+	
+//		var qtyOnHand = $(this).find('td').eq(row).text();
+		total += parseFloat( $(this).find('td').eq(row).text());
+		
+	});
+	return total;	
+}
+
+
 function removeRow(tableId, index,url) {
-	alert(url);
 	if (url==null || url == undefined)
-		url="deleteItem/"+index;
+		url="deleteItem/"+index+".html";
 	var rows = $("#"+tableId).find('tbody tr').length;
-	alert(rows);
 	if (rows > 0) {
 		$.ajax({
 			type:"get",
 			url:url,
 			success:function(data){ 
 				$("#"+tableId).find('tbody tr').eq(index).remove();
+				computeTotalQty();
 			}
 			
 		});
@@ -83,6 +94,7 @@ $.fn.addData = function (aDataSupplied,removable) {
 	 alert(row);
 
 	  $(this).find('tbody').append(row);
+	 
 
 }
 

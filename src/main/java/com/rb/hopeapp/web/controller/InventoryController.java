@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.naming.Context;
+import javax.persistence.AttributeOverride;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -17,9 +18,11 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.aspectj.apache.bcel.generic.AllocationInstruction;
+import org.hibernate.Hibernate;
 import org.pojomatic.Pojomatic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -64,55 +67,38 @@ public class InventoryController {
 	@Qualifier("productService")
 	ProductManager productService;
 	
-//	@Autowired
-//	ServletContext contex;
-//	@Autowired
-//	ProductDao productDao;
-//	
-//	@Autowired
-//	UnitConversionDao unitConversionDao;
-//	
-//	@Autowired
-//	ProductCategoryDao productCategoryDao;
-//	
-//	@Autowired
-//	StatusDao statusDao;
 
 	List<ProductDtl> productDtls = new AutoPopulatingList(ProductDtl.class);
 
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView getProducts() {
-		String now = (new java.util.Date()).toString();
-		logger.info("returning hello view with " + now);
+	@RequestMapping(value = "/list.html", method = RequestMethod.GET)
+	public ModelAndView getProducts(@ModelAttribute("p")String p) {
 		Map<String, Object> myModel = new HashMap<String, Object>();
-		myModel.put("now", now);
-		// User user = userDao.findById(1);
-		// logger.info("user :"+ user.getUsername());
-		// List<Product> products = this.productManager.getProducts();
-		// Product product = this.productManager.getProduct(1000);
-		// myModel.put("products", products );
-//		List<UnitConversion> units = productManager.getUnitConversions();
 
-//		myModel.put("units", units);
-		return new ModelAndView("product", "model", myModel);
+		List<ProductDtl> products = productService.getProductDtls();
+		logger.info("p value :"+ p);
+		PagedListHolder<ProductDtl> productList = new PagedListHolder<ProductDtl>(products);
+		try{
+			productList.setPage(Integer.parseInt(p));
+		
+		}catch(NumberFormatException nfe) {
+			logger.info(nfe.getMessage());
+		}
+		productList.setPageSize(2);
+//		myModel.put("products", productList);
+//		myModel.put("pagedListHolder", productList);
+		
+//		Hibernate.initialize(products.get(index))
+		return new ModelAndView("paging", "pagedListHolder", productList);
 	}
+	
 
 	@RequestMapping(value = "/new.html",method=RequestMethod.GET)
 	public String createProduct(ModelMap model) {
-
 		Product product = new Product();
-
-//		productDtls = new AutoPopulatingList(ProductDtl.class);
 		ProductDtl dtl = new ProductDtl();
-		// dtl.setpr
-//		UnitConversion unit = new UnitConversion();
-		// productDtls.add(dtl);
 		product.setProductDtls(productDtls);
 		model.addAttribute("product", product);
 		model.addAttribute("productDtl", dtl);
-		// model.addAttribute("unit", unit);
-		// model.addAttribute("rows",productDtls.size());
-		// mav.addObject("product",product);
 		return "createProduct";
 
 	}
@@ -135,28 +121,23 @@ public class InventoryController {
 	@RequestMapping(value = "/addItem.html", method = RequestMethod.POST)
 	public String addItemProduct(@ModelAttribute("product") Product product,
 			BindingResult result,ModelMap model) {
-//		ProductDtl dtl = new ProductDtl();
 		logger.info(product.toString());
 		ProductDtl productDtl = new ProductDtl();
-//		productDtl.setProductDtlName("test");
-//		productDtls.add(product);
-//		return new ModelAndView("redirect:new");
 		model.addAttribute("product", product);
 		model.addAttribute("productDtl", productDtl);
 		return "createProductDetail";
 	}
 
+	
+	/******************************** AJAX REQUEST *******************************/
+	
 	@RequestMapping(value = "/deleteItem/{index}.html",method=RequestMethod.GET)
 	@ResponseBody
 	public String deleteItem(@PathVariable int index,
 			HttpServletRequest request) {
 		logger.info("index pass :"+ index);
 		productDtls.remove(index);
-//		logger.info("context path "+ contex.getContextPath());
-//		logger.info("context path 2 : " + contex.getServletContextName());
-		
-//		String redirect = "/hopeapp/product/new";
-//		return new ModelAndView(redirect);
+
 		return index+"";
 	}
 
@@ -164,10 +145,24 @@ public class InventoryController {
 	@ResponseBody
 	public ProductDtl addDtlProduct(@ModelAttribute("productDtl")ProductDtl productDtl,
 			BindingResult result) {
-//		ProductDtl dtl = new ProductDtl();
+
 		logger.info("product Dtl :"+ productDtl.toString());
 		productDtls.add(productDtl);
 		return productDtl;
+	}
+	
+	@RequestMapping(value="/totalQty.html", method=RequestMethod.POST,
+			produces={MediaType.APPLICATION_JSON_VALUE})
+	@ResponseBody
+	public String getProductTotalQtyOnHand(@ModelAttribute("product") Product product,
+			BindingResult result) throws NoSuchNameException {
+		String qtyOnHand = "";
+		if (product.getProductDtls()==null) {
+			product.setProductDtls(productDtls);
+		}
+		 double qty = productService.computeProductTotalQtyOnHand(product);
+		 qtyOnHand = qty+"";
+		return qtyOnHand;
 	}
 
 	/**
@@ -178,29 +173,13 @@ public class InventoryController {
 	public List<String> populateProductCategories()
 			throws NoCategoriesException {
 		return productService.getProductCategories();
-//		List<String> categories = new ArrayList<String>();
-//		for (ProductCategory category :productCategoryDao.getProductCategories()) {
-//			categories.add(category.getCategoryName());
-//		}
-//		return categories;
+
 	}
 
 	@ModelAttribute("unitlist")
 	public List<String> populateUnitList() {
 		return productService.getUnitList();
-//		List<String> units = new ArrayList<String>();
-//		for (UnitConversion unit : unitConversionDao.getAllUnitConversion()) {
-//			units.add(unit.getName());
-//			
-//		}
-//		return units;
 	}
-	// @ModelAttribute("productDtls")
-	// public List<ProductDtl> initializeProductDtls() {
-	// List<ProductDtl> list = new ArrayList<ProductDtl>();
-	// ProductDtl productDtl = new ProductDtl();
-	// productDtl.setProductDtlName("gamay");
-	// return list;
-	// }
+	
 
 }

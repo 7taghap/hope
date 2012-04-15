@@ -1,6 +1,6 @@
 <%@ include file="/taglibs.jsp"%>
 
-<form:form commandName="product" method="post" action="save.html">
+<form:form commandName="product" method="post" action="save.html" id="productForm">
 	<input type="hidden" name="flightId" value="${flight.id}" />
 	<table class="cw-FlexTable">
 
@@ -125,7 +125,23 @@
 
 <script type="text/javascript">
 
-    
+// compute total base on table value
+function computeTotalQty() {
+	//var totalQtyHand = $("#box-table").getSumOfRow(4);
+	//alert("total qty : "+ totalQtyHand);
+	//$("#totalQtyOnHand").val(totalQtyHand);
+	$.ajax({
+		type:"post",
+		url:"totalQty.html",
+		data:$("#productForm").serializeArray(),
+		success: function(data) {
+			alert(data);
+			$("#totalQtyOnHand").val(data);
+		}
+	});
+}
+
+	//product dtl add button
     $("#addProductDtl").click(function() {
 	
 		$.ajax({
@@ -142,13 +158,17 @@
 				aData[5] =data.unitConversion.name;
 				
 				$("#box-table").addData(aData,true);
-				
+				 computeTotalQty();
 			}
 			
 			});
 		TopUp.overlayClose();
+		
 		return false;
 	});
+    
+    
+    
 	$("#cancelProductDtl").click(function() {
 		$('#dtlform').clearDivInput();
 		TopUp.overlayClose();

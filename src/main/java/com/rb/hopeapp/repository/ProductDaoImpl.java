@@ -26,7 +26,6 @@ public class ProductDaoImpl extends AbstractJpaDao<Integer, Product> implements 
 		return findOne(id);
 	}
 	
-	@Transactional
 	public Product saveProduct(Product product) throws ProductNotSaveException{
 		try{
 			System.out.println("before saving product" + product.toString());
