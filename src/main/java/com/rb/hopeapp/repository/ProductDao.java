@@ -3,6 +3,7 @@ package com.rb.hopeapp.repository;
 import java.util.List;
 
 import com.rb.hopeapp.domain.Product;
+import com.rb.hopeapp.exception.NoRecordFoundException;
 import com.rb.hopeapp.exception.ProductNotSaveException;
 
 
@@ -14,4 +15,6 @@ public interface ProductDao {
 	boolean deleteProduct(Product product);
 	List<Product> findByCategory(String category);
 	List<Product> findByName(String name);
+
+	
 }

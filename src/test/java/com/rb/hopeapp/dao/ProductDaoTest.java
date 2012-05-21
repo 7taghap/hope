@@ -1,4 +1,4 @@
-package com.rb.hopeapp.dao;
+ package com.rb.hopeapp.dao;
 
 import static org.junit.Assert.*;
 
@@ -18,10 +18,12 @@ import com.rb.hopeapp.domain.ProductCategory;
 import com.rb.hopeapp.domain.ProductDtl;
 import com.rb.hopeapp.domain.Status;
 import com.rb.hopeapp.domain.UnitConversion;
+import com.rb.hopeapp.exception.NoRecordFoundException;
 import com.rb.hopeapp.exception.NoSuchNameException;
 import com.rb.hopeapp.exception.ProductNotSaveException;
 import com.rb.hopeapp.repository.ProductCategoryDao;
 import com.rb.hopeapp.repository.ProductDao;
+import com.rb.hopeapp.repository.ProductDtlDao;
 import com.rb.hopeapp.repository.UnitConversionDao;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -36,7 +38,23 @@ public class ProductDaoTest {
 	
 	@Autowired
 	ProductCategoryDao productCategoryDao;
+	
+	@Autowired
+	ProductDtlDao productDtlDao;
+	
+
+	public void getProductDtlByName() {
+		List<ProductDtl> list = productDtlDao.findProductDtlsLike("chippy");
+		assertNotNull(list);
+		assertTrue("no results", list.size() < 1);
+	}
+	
 	@Test
+	public void getProductDtlsWithHigerUnit() throws NoRecordFoundException {
+		ProductDtl productDtl = productDtlDao.getProductWithHigherUnit(1, 1d);
+	}
+	
+	
 	public void saveProduct() throws NoSuchNameException {
 		List<ProductDtl> productDtls = new ArrayList<ProductDtl>();
 		//look up table

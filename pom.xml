@@ -74,13 +74,7 @@
 			<version>1.0.0.GA</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>javax.validation</groupId>
-			<artifactId>validation-api</artifactId>
-			<version>1.0.0.GA</version>
-			<classifier>sources</classifier>
-			<scope>test</scope>
-		</dependency>
+
 		
 		<!--  spring -->
 		<dependency>
@@ -131,6 +125,7 @@
 			<artifactId>spring-aop</artifactId>
 			<version>${org.springframework.version}</version>
 		</dependency>
+
 		
 		<!-- <dependency> -->
 		<!-- <groupId>org.springframework.security</groupId> -->
@@ -181,12 +176,23 @@
 			<artifactId>c3p0</artifactId>
 			<version>0.9.1.2</version>
 		</dependency>
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.hibernate</groupId> -->
-<!-- 			<artifactId>hibernate-validator</artifactId> -->
-<!-- 			<version>4.2.0.Final</version> -->
-<!-- 		</dependency> -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>4.0.2.GA</version>
+		</dependency>
 
+	<!--  logging -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.slf4j</groupId> -->
+<!-- 			<artifactId>slf4j-api</artifactId> -->
+<!-- 			<version>1.6.4</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.slf4j</groupId> -->
+<!-- 			<artifactId>slf4j-log4j12</artifactId> -->
+<!-- 			<version>1.6.4</version> -->
+<!-- 		</dependency> -->
 	<!--  utilities -->
 		<dependency>
 			<groupId>org.pojomatic</groupId>
@@ -194,10 +200,6 @@
 			<version>1.0</version>
 			<!-- equals/hashCode/toString support -->
 		</dependency>
-		
-		
-		
-		
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
@@ -249,7 +251,12 @@
 		</dependency>
 	
 	<!--  unit test -->
-
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.0.0.GA</version>
+			
+		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
@@ -333,55 +340,20 @@
 			<plugin>
 				<groupId>org.codehaus.cargo</groupId>
 				<artifactId>cargo-maven2-plugin</artifactId>
-				<version>1.0.1-alpha-2</version>
+				<version>1.2.0</version>
 				<configuration>
-					<wait>false</wait>
+					<wait>true</wait>
 					<container>
-						<containerId>jetty6x</containerId>
+						<containerId>jetty7x</containerId>
 						<type>embedded</type>
-						<systemProperties>
-							<org.apache.commons.logging.Log>
-								org.apache.commons.logging.impl.SimpleLog
-							</org.apache.commons.logging.Log>
-						</systemProperties>
 					</container>
 					<configuration>
 						<properties>
-							<cargo.servlet.port>9091</cargo.servlet.port>
+							<cargo.servlet.port>8080</cargo.servlet.port>
 						</properties>
-						<deployables>
-							<deployable>
-								<groupId>com.rb.hopeapp</groupId>
-								<artifactId>hope</artifactId>
-								<type>war</type>
-								<properties>
-									<context>/</context>
-								</properties>
-								<pingURL>
-									http://localhost:9091/IntegrationTest
-								</pingURL>
-							</deployable>
-						</deployables>
 					</configuration>
 				</configuration>
-				<executions>
-					<execution>
-						<id>start-container</id>
-						<phase>pre-integration-test</phase>
-						<goals>
-							<goal>start</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>stop-container</id>
-						<phase>post-integration-test</phase>
-						<goals>
-							<goal>stop</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>

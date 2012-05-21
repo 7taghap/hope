@@ -1,14 +1,32 @@
 package com.rb.hopeapp.domain;
 
 import java.io.Serializable;
-import javax.persistence.*;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.pojomatic.Pojomatic;
 import org.pojomatic.annotations.AutoProperty;
 
+import com.rb.hopeapp.domain.namedqueries.NamedQueriesParam;
 import com.rb.hopeapp.domain.namedqueries.ProductNameQueries;
 
 import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 
 /**
@@ -20,7 +38,11 @@ import java.util.Date;
 @Table(name="product_dtl")
 @NamedQueries({
 	@NamedQuery(name=ProductNameQueries.FIND_DETAILS_BY_CATEGORY, 
-		query="select o from ProductDtl o")
+		query="select o from ProductDtl o"),
+	@NamedQuery(name=ProductNameQueries.FIND_DETAILS_LIKE_NAME , 
+	   query="select o FROM ProductDtl o where LOWER(o.product.productName) LIKE :name"),
+	 @NamedQuery(name=ProductNameQueries.FIND_PRODUCT_DETAIL_WITH_HIGER_UNIT , 
+	 query="select o from ProductDtl o where o.product.productId=:"+NamedQueriesParam.SEARCH_ID + " and o.unitConversion.factor > :"+NamedQueriesParam.SEARCH_UNIT_FACTOR)
 })
 public class ProductDtl implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -30,6 +52,9 @@ public class ProductDtl implements Serializable {
 	@Column(name="product_dtl_id")
 	private int productDtlId;
 	
+	@NotEmpty
+	@Size(min = 1, max = 20)
+	@NotNull
 	@Column(name="dtl_name")
 	private String productDtlName;
 

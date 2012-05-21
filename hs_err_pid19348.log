@@ -1,0 +1,728 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGSEGV (0xb) at pc=0xb49b6a7a, pid=19348, tid=1857682288
+#
+# JRE version: 6.0_23-b23
+# Java VM: OpenJDK Server VM (20.0-b11 mixed mode linux-x86 )
+# Derivative: IcedTea6 1.11pre
+# Distribution: Ubuntu 11.10, package 6b23~pre11-0ubuntu1.11.10.2
+# Problematic frame:
+# J  sun.misc.URLClassPath.getLoader(I)Lsun/misc/URLClassPath$Loader;
+#
+# If you would like to submit a bug report, please include
+# instructions how to reproduce the bug and visit:
+#   https://bugs.launchpad.net/ubuntu/+source/openjdk-6/
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x7504a000):  JavaThread "Thread-22" [_thread_in_Java, id=19422, stack(0x6eb4f000,0x6eba0000)]
+
+siginfo:si_signo=SIGSEGV: si_errno=0, si_code=128 (), si_addr=0x00000000
+
+Registers:
+EAX=0x00000031, EBX=0x00000001, ECX=0x7504a000, EDX=0x00000002
+ESP=0x6eb9d1f0, EBP=0x7e5e2f80, ESI=0x6eb9d230, EDI=0x7e5ecd10
+EIP=0xb49b6a7a, EFLAGS=0x00210297, CR2=0x00000004
+
+Top of Stack: (sp=0x6eb9d1f0)
+0x6eb9d1f0:   b483a188 b483a5cf 6eb9d228 00000000
+0x6eb9d200:   6eb9d230 00000002 6eb9d248 b477bc87
+0x6eb9d210:   7504a120 7504a000 75e0f5c0 00000000
+0x6eb9d220:   6eb9d228 00000001 a579d958 01c3ca44
+0x6eb9d230:   76602028 00000000 6eb9d274 b472a047
+0x6eb9d240:   b472a047 00000001 00000007 b47ffae4
+0x6eb9d250:   75e0f5c0 00000000 765f1aaf 6eb9d28c
+0x6eb9d260:   a579d958 7e5ecc10 7e5ecd10 7504a000 
+
+Instructions: (pc=0xb49b6a7a)
+0xb49b6a5a:   89 54 24 14 8b e9 8b 01 8b d8 83 e3 07 8b cc c1
+0xb49b6a6a:   e9 0c 8b 0c 8d 40 a5 83 01 89 4c 24 24 83 fb 05
+0xb49b6a7a:   0f 85 c1 29 00 00 bb e0 23 5f 76 8b 7b 64 8b cf
+0xb49b6a8a:   8b 54 24 24 0b ca 8b d9 33 d8 f7 c3 87 ff ff ff 
+
+Register to memory mapping:
+
+EAX=0x00000031 is an unknown value
+EBX=0x00000001 is an unknown value
+ECX=0x7504a000 is a thread
+EDX=0x00000002 is an unknown value
+ESP=0x6eb9d1f0 is pointing into the stack for thread: 0x7504a000
+EBP=0x7e5e2f80 is an oop
+sun.misc.URLClassPath 
+ - klass: 'sun/misc/URLClassPath'
+ESI=0x6eb9d230 is pointing into the stack for thread: 0x7504a000
+EDI=0x7e5ecd10 is an oop
+java.util.jar.JarFile 
+ - klass: 'java/util/jar/JarFile'
+
+
+Stack: [0x6eb4f000,0x6eba0000],  sp=0x6eb9d1f0,  free space=312k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+J  sun.misc.URLClassPath.getLoader(I)Lsun/misc/URLClassPath$Loader;
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x70d4b400 JavaThread "HashSessionScavenger-0" daemon [_thread_blocked, id=19423, stack(0x6db5c000,0x6dbad000)]
+=>0x7504a000 JavaThread "Thread-22" [_thread_in_Java, id=19422, stack(0x6eb4f000,0x6eba0000)]
+  0x6f5f7800 JavaThread "resolver-5" daemon [_thread_blocked, id=19421, stack(0x70b0d000,0x70b5e000)]
+  0x70ed0800 JavaThread "resolver-4" daemon [_thread_blocked, id=19420, stack(0x70baf000,0x70c00000)]
+  0x6f5db800 JavaThread "resolver-3" daemon [_thread_blocked, id=19419, stack(0x70b5e000,0x70baf000)]
+  0x727ba400 JavaThread "resolver-2" daemon [_thread_blocked, id=19418, stack(0x6edaa000,0x6edfb000)]
+  0x72111400 JavaThread "resolver-1" daemon [_thread_blocked, id=19417, stack(0x752af000,0x75300000)]
+  0x7552b400 JavaThread "com.google.inject.internal.util.$Finalizer" daemon [_thread_blocked, id=19370, stack(0x7560b000,0x7565c000)]
+  0x75e04000 JavaThread "Low Memory Detector" daemon [_thread_blocked, id=19368, stack(0x75735000,0x75786000)]
+  0x08504800 JavaThread "C2 CompilerThread1" daemon [_thread_in_native, id=19367, stack(0x75786000,0x75807000)]
+  0x08502000 JavaThread "C2 CompilerThread0" daemon [_thread_in_native, id=19366, stack(0x75807000,0x75888000)]
+  0x08500800 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=19365, stack(0x75888000,0x758d9000)]
+  0x084f1400 JavaThread "Finalizer" daemon [_thread_blocked, id=19364, stack(0x75b1a000,0x75b6b000)]
+  0x084efc00 JavaThread "Reference Handler" daemon [_thread_blocked, id=19363, stack(0x75b6b000,0x75bbc000)]
+  0x08444000 JavaThread "main" [_thread_blocked, id=19357, stack(0xb7727000,0xb7778000)]
+
+Other Threads:
+  0x084ebc00 VMThread [stack: 0x75bbc000,0x75c3d000] [id=19362]
+  0x75e06000 WatcherThread [stack: 0x756b4000,0x75735000] [id=19369]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap
+ PSYoungGen      total 81984K, used 53628K [0xa25c0000, 0xab180000, 0xb4660000)
+  eden space 79552K, 64% used [0xa25c0000,0xa57bff48,0xa7370000)
+  from space 2432K, 99% used [0xaaf20000,0xab17f290,0xab180000)
+  to   space 7488K, 0% used [0xaa2e0000,0xaa2e0000,0xaaa30000)
+ PSOldGen        total 36928K, used 16942K [0x7e460000, 0x80870000, 0xa25c0000)
+  object space 36928K, 45% used [0x7e460000,0x7f4eb830,0x80870000)
+ PSPermGen       total 38656K, used 38642K [0x76460000, 0x78a20000, 0x7e460000)
+  object space 38656K, 99% used [0x76460000,0x78a1c960,0x78a20000)
+
+Code Cache  [0xb4727000, 0xb49cf000, 0xb7727000)
+ total_blobs=910 nmethods=766 adapters=97 free_code_cache=47663680 largest_free_block=26240
+
+Dynamic libraries:
+00110000-00123000 r-xp 00000000 07:00 784377     /lib/i386-linux-gnu/libz.so.1.2.3.4
+00123000-00124000 r--p 00012000 07:00 784377     /lib/i386-linux-gnu/libz.so.1.2.3.4
+00124000-00125000 rw-p 00013000 07:00 784377     /lib/i386-linux-gnu/libz.so.1.2.3.4
+00125000-00130000 r-xp 00000000 07:00 411249     /usr/lib/jvm/java-6-openjdk/jre/lib/i386/libverify.so
+00130000-00131000 ---p 0000b000 07:00 411249     /usr/lib/jvm/java-6-openjdk/jre/lib/i386/libverify.so
+00131000-00132000 r--p 0000b000 07:00 411249     /usr/lib/jvm/java-6-openjdk/jre/lib/i386/libverify.so
+00132000-00133000 rw-p 0000c000 07:00 411249     /usr/lib/jvm/java-6-openjdk/jre/lib/i386/libverify.so
+00133000-0013b000 r-xp 00000000 07:00 815578     /lib/i386-linux-gnu/libnss_compat-2.13.so
+0013b000-0013c000 r--p 00007000 07:00 815578     /lib/i386-linux-gnu/libnss_compat-2.13.so
+0013c000-0013d000 rw-p 00008000 07:00 815578     /lib/i386-linux-gnu/libnss_compat-2.13.so
+00144000-00145000 r-xp 00000000 00:00 0          [vdso]
+0023f000-00243000 r-xp 00000000 07:00 411221     /usr/lib/jvm/java-6-openjdk/jre/lib/i386/jli/libjli.so
+00243000-00244000 r--p 00003000 07:00 411221     /usr/lib/jvm/java-6-openjdk/jre/lib/i386/jli/libjli.so
+00244000-00245000 rw-p 00004000 07:00 411221     /usr/lib/jvm/java-6-openjdk/jre/lib/i386/jli/libjli.so
+00256000-0027c000 r-xp 00000000 07:00 411233     /usr/lib/jvm/java-6-openjdk/jre/lib/i386/libjava.so
+0027c000-0027d000 r--p 00025000 07:00 411233     /usr/lib/jvm/java-6-openjdk/jre/lib/i386/libjava.so
+0027d000-0027f000 rw-p 00026000 07:00 411233     /usr/lib/jvm/java-6-openjdk/jre/lib/i386/libjava.so
+00303000-00321000 r-xp 00000000 07:00 811449     /lib/i386-linux-gnu/ld-2.13.so
+00321000-00322000 r--p 0001d000 07:00 811449     /lib/i386-linux-gnu/ld-2.13.so
+00322000-00323000 rw-p 0001e000 07:00 811449     /lib/i386-linux-gnu/ld-2.13.so
+00323000-0049b000 r-xp 00000000 07:00 814284     /lib/i386-linux-gnu/libc-2.13.so
+0049b000-0049d000 r--p 00178000 07:00 814284     /lib/i386-linux-gnu/libc-2.13.so
+0049d000-0049e000 rw-p 0017a000 07:00 814284     /lib/i386-linux-gnu/libc-2.13.so
+0049e000-004a1000 rw-p 00000000 00:00 0 
+004df000-004e9000 r-xp 00000000 07:00 817329     /lib/i386-linux-gnu/libnss_nis-2.13.so
+004e9000-004ea000 r--p 00009000 07:00 817329     /lib/i386-linux-gnu/libnss_nis-2.13.so
+004ea000-004eb000 rw-p 0000a000 07:00 817329     /lib/i386-linux-gnu/libnss_nis-2.13.so
+0063e000-00645000 r-xp 00000000 07:00 818255     /lib/i386-linux-gnu/librt-2.13.so
+00645000-00646000 r--p 00006000 07:00 818255     /lib/i386-linux-gnu/librt-2.13.so
+00646000-00647000 rw-p 00007000 07:00 818255     /lib/i386-linux-gnu/librt-2.13.so
+00673000-0068f000 r-xp 00000000 07:00 784315     /lib/i386-linux-gnu/libgcc_s.so.1
+0068f000-00690000 r--p 0001b000 07:00 784315     /lib/i386-linux-gnu/libgcc_s.so.1
+00690000-00691000 rw-p 0001c000 07:00 784315     /lib/i386-linux-gnu/libgcc_s.so.1
+0073b000-00819000 r-xp 00000000 07:00 397189     /usr/lib/i386-linux-gnu/libstdc++.so.6.0.16
+00819000-0081a000 ---p 000de000 07:00 397189     /usr/lib/i386-linux-gnu/libstdc++.so.6.0.16
+0081a000-0081e000 r--p 000de000 07:00 397189     /usr/lib/i386-linux-gnu/libstdc++.so.6.0.16
+0081e000-0081f000 rw-p 000e2000 07:00 397189     /usr/lib/i386-linux-gnu/libstdc++.so.6.0.16
+0081f000-00826000 rw-p 00000000 00:00 0 
+00a20000-00a27000 r-xp 00000000 07:00 411250     /usr/lib/jvm/java-6-openjdk/jre/lib/i386/libzip.so
+00a27000-00a28000 r--p 00006000 07:00 411250     /usr/lib/jvm/java-6-openjdk/jre/lib/i386/libzip.so
+00a28000-00a29000 rw-p 00007000 07:00 411250     /usr/lib/jvm/java-6-openjdk/jre/lib/i386/libzip.so
+00af8000-00afb000 r-xp 00000000 07:00 815236     /lib/i386-linux-gnu/libdl-2.13.so
+00afb000-00afc000 r--p 00002000 07:00 815236     /lib/i386-linux-gnu/libdl-2.13.so
+00afc000-00afd000 rw-p 00003000 07:00 815236     /lib/i386-linux-gnu/libdl-2.13.so
+00b7d000-00b85000 r-xp 00000000 07:00 411244     /usr/lib/jvm/java-6-openjdk/jre/lib/i386/libnio.so
+00b85000-00b86000 r--p 00007000 07:00 411244     /usr/lib/jvm/java-6-openjdk/jre/lib/i386/libnio.so
+00b86000-00b87000 rw-p 00008000 07:00 411244     /usr/lib/jvm/java-6-openjdk/jre/lib/i386/libnio.so
+00c05000-00c1a000 r-xp 00000000 07:00 411243     /usr/lib/jvm/java-6-openjdk/jre/lib/i386/libnet.so
+00c1a000-00c1b000 r--p 00014000 07:00 411243     /usr/lib/jvm/java-6-openjdk/jre/lib/i386/libnet.so
+00c1b000-00c1c000 rw-p 00015000 07:00 411243     /usr/lib/jvm/java-6-openjdk/jre/lib/i386/libnet.so
+00ddb000-00df0000 r-xp 00000000 07:00 815576     /lib/i386-linux-gnu/libnsl-2.13.so
+00df0000-00df1000 r--p 00015000 07:00 815576     /lib/i386-linux-gnu/libnsl-2.13.so
+00df1000-00df2000 rw-p 00016000 07:00 815576     /lib/i386-linux-gnu/libnsl-2.13.so
+00df2000-00df4000 rw-p 00000000 00:00 0 
+00e33000-00e3e000 r-xp 00000000 07:00 815580     /lib/i386-linux-gnu/libnss_files-2.13.so
+00e3e000-00e3f000 r--p 0000a000 07:00 815580     /lib/i386-linux-gnu/libnss_files-2.13.so
+00e3f000-00e40000 rw-p 0000b000 07:00 815580     /lib/i386-linux-gnu/libnss_files-2.13.so
+00f66000-00f8e000 r-xp 00000000 07:00 815242     /lib/i386-linux-gnu/libm-2.13.so
+00f8e000-00f8f000 r--p 00028000 07:00 815242     /lib/i386-linux-gnu/libm-2.13.so
+00f8f000-00f90000 rw-p 00029000 07:00 815242     /lib/i386-linux-gnu/libm-2.13.so
+00f97000-00fae000 r-xp 00000000 07:00 818247     /lib/i386-linux-gnu/libpthread-2.13.so
+00fae000-00faf000 r--p 00016000 07:00 818247     /lib/i386-linux-gnu/libpthread-2.13.so
+00faf000-00fb0000 rw-p 00017000 07:00 818247     /lib/i386-linux-gnu/libpthread-2.13.so
+00fb0000-00fb2000 rw-p 00000000 00:00 0 
+00fb2000-017d0000 r-xp 00000000 07:00 411254     /usr/lib/jvm/java-6-openjdk/jre/lib/i386/server/libjvm.so
+017d0000-01815000 r--p 0081e000 07:00 411254     /usr/lib/jvm/java-6-openjdk/jre/lib/i386/server/libjvm.so
+01815000-01824000 rw-p 00863000 07:00 411254     /usr/lib/jvm/java-6-openjdk/jre/lib/i386/server/libjvm.so
+01824000-01c3e000 rw-p 00000000 00:00 0 
+08048000-08051000 r-xp 00000000 07:00 411282     /usr/lib/jvm/java-6-openjdk/jre/bin/java
+08051000-08052000 r--p 00008000 07:00 411282     /usr/lib/jvm/java-6-openjdk/jre/bin/java
+08052000-08053000 rw-p 00009000 07:00 411282     /usr/lib/jvm/java-6-openjdk/jre/bin/java
+0843d000-0f05c000 rw-p 00000000 00:00 0          [heap]
+6d2df000-6d400000 rw-p 00000000 00:00 0 
+6da00000-6dafc000 rw-p 00000000 00:00 0 
+6dafc000-6db00000 ---p 00000000 00:00 0 
+6db39000-6db47000 r--s 00351000 07:00 395151     /usr/lib/jvm/java-6-openjdk/jre/lib/charsets.jar
+6db47000-6db55000 r--s 00351000 07:00 395151     /usr/lib/jvm/java-6-openjdk/jre/lib/charsets.jar
+6db55000-6db5c000 r--s 000fb000 07:00 400741     /usr/lib/jvm/java-6-openjdk/jre/lib/resources.jar
+6db5c000-6db5f000 ---p 00000000 00:00 0 
+6db5f000-6dbad000 rw-p 00000000 00:00 0 
+6dbad000-6dbb7000 r--s 0006d000 07:00 1066785    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/jackson-mapper-asl-1.5.3.jar
+6dbb7000-6dbb9000 r--s 00004000 07:00 1066783    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/slf4j-api-1.5.6.jar
+6dbb9000-6dbc0000 r--s 00051000 07:00 1066781    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/log4j-1.2.13.jar
+6dbc0000-6dbca000 r--s 00059000 07:00 1066778    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/spring-jdbc-3.1.1.RELEASE.jar
+6dbca000-6dbd3000 r--s 00058000 07:00 1066777    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/standard-1.1.2.jar
+6dbd3000-6dbd5000 r--s 0000d000 07:00 1066775    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/jboss-logging-3.1.0.CR2.jar
+6dbd5000-6dbd6000 r--s 0000c000 07:00 1066774    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/spring-asm-3.1.1.RELEASE.jar
+6dbd6000-6dbe4000 r--s 0010a000 07:00 1066768    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/itext-1.3.jar
+6dbe4000-6dbf0000 r--s 00081000 07:00 1066767    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/spring-webmvc-3.1.1.RELEASE.jar
+6dbf0000-6dbf1000 r--s 0000a000 07:00 1066766    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/asm-3.3.1.jar
+6dbf1000-6dbf6000 r--s 00040000 07:00 1066765    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/commons-lang-2.5.jar
+6dbf6000-6dc00000 r--s 0006b000 07:00 1066764    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/hibernate-entitymanager-4.1.0.Final.jar
+6dc00000-6dcac000 rw-p 00000000 00:00 0 
+6dcac000-6dd00000 ---p 00000000 00:00 0 
+6dd00000-6dd05000 r--s 00068000 07:00 1066763    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/antlr-2.7.7.jar
+6dd05000-6dd0a000 r--s 0002a000 07:00 1066762    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/commons-beanutils-1.7.0.jar
+6dd0a000-6dd0b000 r--s 00002000 07:00 1066761    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/jboss-transaction-api_1.1_spec-1.0.0.Final.jar
+6dd0b000-6dd0d000 r--s 00000000 07:00 1066742    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/aopalliance-1.0.jar
+6dd0d000-6dd10000 r--s 00009000 07:00 1066740    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/validation-api-1.0.0.GA.jar
+6dd10000-6dd18000 r--s 00035000 07:00 1066730    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/spring-tx-3.1.1.RELEASE.jar
+6dd18000-6dd2d000 r--s 000b6000 07:00 1066728    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/spring-context-3.1.1.RELEASE.jar
+6dd2d000-6dd2f000 r--s 00004000 07:00 1066711    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/stax-api-1.0-2.jar
+6dd2f000-6dd36000 r--s 000ba000 07:00 1066710    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/mysql-connector-java-5.1.18.jar
+6dd36000-6dd38000 r--s 00004000 07:00 1066709    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/jstl-1.1.2.jar
+6dd38000-6dd3b000 r--s 00013000 07:00 1066708    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/jaxb-api-2.1.jar
+6dd3b000-6dd40000 r--s 00016000 07:00 1066707    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/xml-apis-1.0.b2.jar
+6dd40000-6dd45000 r--s 00015000 07:00 1066254    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/hibernate-jpa-2.0-api-1.0.1.Final.jar
+6dd45000-6dd46000 r--s 00003000 07:00 1066074    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/jcl104-over-slf4j-1.4.2.jar
+6dd46000-6dd57000 r--s 000bd000 07:00 1066026    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/jaxb-impl-2.1.3.jar
+6dd57000-6dd59000 r--s 0000e000 07:00 1066024    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/activation-1.1.jar
+6dd59000-6dd5d000 r--s 00032000 07:00 1066022    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/displaytag-1.2.jar
+6dd5d000-6dd6c000 r--s 00073000 07:00 1066020    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/joda-time-1.5.jar
+6dd6c000-6dd6f000 r--s 00018000 07:00 1066016    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/spring-context-support-3.1.1.RELEASE.jar
+6dd6f000-6dd76000 r--s 00040000 07:00 1066010    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/cglib-2.2.2.jar
+6dd76000-6ddc0000 r--s 003d4000 07:00 1066008    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/hibernate-core-4.1.0.Final.jar
+6ddc0000-6ddc8000 r--s 00049000 07:00 1066004    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/spring-aop-3.1.1.RELEASE.jar
+6ddc8000-6dde4000 r--s 001b3000 07:00 1066002    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/aspectjweaver-1.5.4.jar
+6dde4000-6ddea000 r--s 00027000 07:00 1066000    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/sitemesh-2.4.2.jar
+6ddea000-6ddef000 r--s 00048000 07:00 1065996    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/dom4j-1.6.1.jar
+6ddef000-6ddf4000 r--s 00027000 07:00 1065994    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/spring-expression-3.1.1.RELEASE.jar
+6ddf4000-6de00000 r--s 00079000 07:00 1065990    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/spring-web-3.1.1.RELEASE.jar
+6de00000-6deff000 rw-p 00000000 00:00 0 
+6deff000-6df00000 ---p 00000000 00:00 0 
+6df00000-6dffb000 rw-p 00000000 00:00 0 
+6dffb000-6e000000 ---p 00000000 00:00 0 
+6e000000-6e0f7000 rw-p 00000000 00:00 0 
+6e0f7000-6e100000 ---p 00000000 00:00 0 
+6e100000-6e1fe000 rw-p 00000000 00:00 0 
+6e1fe000-6e200000 ---p 00000000 00:00 0 
+6e200000-6e3f8000 rw-p 00000000 00:00 0 
+6e3f8000-6e400000 ---p 00000000 00:00 0 
+6e400000-6e4f9000 rw-p 00000000 00:00 0 
+6e4f9000-6e500000 ---p 00000000 00:00 0 
+6e500000-6e5f9000 rw-p 00000000 00:00 0 
+6e5f9000-6e600000 ---p 00000000 00:00 0 
+6e600000-6e6f9000 rw-p 00000000 00:00 0 
+6e6f9000-6e700000 ---p 00000000 00:00 0 
+6e700000-6e7f9000 rw-p 00000000 00:00 0 
+6e7f9000-6e800000 ---p 00000000 00:00 0 
+6e800000-6e8f3000 rw-p 00000000 00:00 0 
+6e8f3000-6e900000 ---p 00000000 00:00 0 
+6e900000-6e9f8000 rw-p 00000000 00:00 0 
+6e9f8000-6ea00000 ---p 00000000 00:00 0 
+6ea00000-6eaff000 rw-p 00000000 00:00 0 
+6eaff000-6eb00000 ---p 00000000 00:00 0 
+6eb02000-6eb05000 r--s 00011000 07:00 1066014    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/hibernate-commons-annotations-4.0.1.Final.jar
+6eb05000-6eb12000 r--s 0007c000 07:00 1065986    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/commons-collections-3.1.jar
+6eb12000-6eb14000 r--s 00010000 07:00 1065982    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/spring-oxm-3.1.1.RELEASE.jar
+6eb14000-6eb16000 r--s 0000d000 07:00 1065974    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/commons-logging-1.1.1.jar
+6eb16000-6eb1f000 r--s 00054000 07:00 1065970    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/spring-orm-3.1.1.RELEASE.jar
+6eb1f000-6eb21000 r--s 00001000 07:00 1065968    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/slf4j-log4j12-1.4.2.jar
+6eb21000-6eb2c000 r--s 00085000 07:00 1065960    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/spring-beans-3.1.1.RELEASE.jar
+6eb2c000-6eb36000 r--s 00064000 07:00 1065952    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/spring-core-3.1.1.RELEASE.jar
+6eb36000-6eb3f000 r--s 00096000 07:00 1065944    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/javassist-3.15.0-GA.jar
+6eb3f000-6eb4a000 r--s 0008b000 07:00 1065932    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/c3p0-0.9.1.2.jar
+6eb4a000-6eb4f000 r--s 00033000 07:00 1065928    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/hibernate-validator-4.0.2.GA.jar
+6eb4f000-6eb52000 ---p 00000000 00:00 0 
+6eb52000-6eba0000 rw-p 00000000 00:00 0 
+6eba0000-6ec00000 r--s 00d92000 07:00 411595     /usr/lib/jvm/java-6-openjdk/lib/tools.jar
+6ec00000-6ecff000 rw-p 00000000 00:00 0 
+6ecff000-6ed00000 ---p 00000000 00:00 0 
+6ed01000-6ed02000 r--s 00006000 07:00 1066012    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/joda-time-jsptags-1.0.1.jar
+6ed02000-6ed04000 r--s 00008000 07:00 1065948    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/pojomatic-1.0.jar
+6ed04000-6ed07000 r--s 00027000 07:00 1065924    /home/caburnar/workspace/hope/target/hopeapp/WEB-INF/lib/jackson-core-asl-1.5.3.jar
+6ed07000-6ed0c000 r--s 01382000 07:00 949647     /home/caburnar/workspace/hope/target/hopeapp.war
+6ed0c000-6ed1d000 r--s 000ea000 07:00 523356     /home/caburnar/.m2/repository/org/mortbay/jetty/jsp-2.1-glassfish/2.1.v20100127/jsp-2.1-glassfish-2.1.v20100127.jar
+6ed1d000-6ed21000 r--s 0001d000 07:00 523344     /home/caburnar/.m2/repository/org/mortbay/jetty/jsp-api-2.1-glassfish/2.1.v20100127/jsp-api-2.1-glassfish-2.1.v20100127.jar
+6ed21000-6ed23000 r--s 00007000 07:00 676445     /home/caburnar/.m2/repository/org/eclipse/jetty/jetty-xml/7.5.3.v20111011/jetty-xml-7.5.3.v20111011.jar
+6ed23000-6ed26000 r--s 00016000 07:00 676440     /home/caburnar/.m2/repository/org/eclipse/jetty/jetty-webapp/7.5.3.v20111011/jetty-webapp-7.5.3.v20111011.jar
+6ed26000-6ed29000 r--s 00013000 07:00 676435     /home/caburnar/.m2/repository/org/eclipse/jetty/jetty-servlet/7.5.3.v20111011/jetty-servlet-7.5.3.v20111011.jar
+6ed29000-6ed2e000 r--s 00046000 07:00 676430     /home/caburnar/.m2/repository/org/eclipse/jetty/jetty-server/7.5.3.v20111011/jetty-server-7.5.3.v20111011.jar
+6ed2e000-6ed31000 r--s 00012000 07:00 675036     /home/caburnar/.m2/repository/org/eclipse/jetty/jetty-security/7.5.3.v20111011/jetty-security-7.5.3.v20111011.jar
+6ed31000-6ed35000 r--s 00031000 07:00 944427     /home/caburnar/.m2/repository/org/eclipse/jetty/jetty-util/7.5.3.v20111011/jetty-util-7.5.3.v20111011.jar
+6ed35000-6ed36000 r--s 00003000 07:00 672359     /home/caburnar/.m2/repository/org/eclipse/jetty/jetty-jsp-2.1/7.5.3.v20111011/jetty-jsp-2.1-7.5.3.v20111011.jar
+6ed36000-6ed39000 r--s 00014000 07:00 672347     /home/caburnar/.m2/repository/org/eclipse/jetty/jetty-io/7.5.3.v20111011/jetty-io-7.5.3.v20111011.jar
+6ed39000-6ed3c000 r--s 0001a000 07:00 833486     /home/caburnar/.m2/repository/org/eclipse/jetty/jetty-http/7.5.3.v20111011/jetty-http-7.5.3.v20111011.jar
+6ed3c000-6ed3d000 r--s 00004000 07:00 672341     /home/caburnar/.m2/repository/org/eclipse/jetty/jetty-continuation/7.5.3.v20111011/jetty-continuation-7.5.3.v20111011.jar
+6ed3d000-6ed4b000 r--s 0018b000 07:00 672333     /home/caburnar/.m2/repository/org/eclipse/jdt/core/compiler/ecj/3.5.1/ecj-3.5.1.jar
+6ed4b000-6ed4d000 r--s 00018000 07:00 273251     /home/caburnar/.m2/repository/javax/servlet/servlet-api/2.5/servlet-api-2.5.jar
+6ed4d000-6ed55000 r--s 00051000 07:00 133664     /home/caburnar/.m2/repository/commons-vfs/commons-vfs/1.0/commons-vfs-1.0.jar
+6ed55000-6ed5c000 r--s 00049000 07:00 10756      /home/caburnar/.m2/repository/cglib/cglib-nodep/2.1_3/cglib-nodep-2.1_3.jar
+6ed5c000-6ed5d000 r--s 00000000 07:00 276794     /home/caburnar/.m2/repository/jmock/jmock-cglib/1.2.0/jmock-cglib-1.2.0.jar
+6ed5d000-6ed61000 r--s 00017000 07:00 276795     /home/caburnar/.m2/repository/jmock/jmock/1.2.0/jmock-1.2.0.jar
+6ed61000-6ed63000 r--s 00005000 07:00 133662     /home/caburnar/.m2/repository/org/codehaus/cargo/cargo-core-api-util/1.2.0/cargo-core-api-util-1.2.0-tests.jar
+6ed63000-6ed67000 r--s 0000f000 07:00 133663     /home/caburnar/.m2/repository/org/codehaus/cargo/cargo-core-api-container/1.2.0/cargo-core-api-container-1.2.0-tests.jar
+6ed67000-6ed6a000 r--s 00015000 07:00 275785     /home/caburnar/.m2/repository/xmlunit/xmlunit/1.2/xmlunit-1.2.jar
+6ed6a000-6ed6d000 r--s 00013000 07:00 133629     /home/caburnar/.m2/repository/org/codehaus/cargo/cargo-core-container-jetty/1.2.0/cargo-core-container-jetty-1.2.0.jar
+6ed6d000-6ed6f000 r--s 00005000 07:00 276102     /home/caburnar/.m2/repository/org/apache/geronimo/specs/geronimo-j2ee-deployment_1.1_spec/1.1/geronimo-j2ee-deployment_1.1_spec-1.1.jar
+6ed6f000-6ed70000 r--s 00002000 07:00 415340     /home/caburnar/.m2/repository/org/apache/ant/ant-launcher/1.7.1/ant-launcher-1.7.1.jar
+6ed70000-6ed84000 r--s 0012f000 07:00 415296     /home/caburnar/.m2/repository/org/apache/ant/ant/1.7.1/ant-1.7.1.jar
+6ed84000-6ed86000 r--s 0001f000 07:00 133617     /home/caburnar/.m2/repository/isorelax/isorelax/20020414/isorelax-20020414.jar
+6ed86000-6ed87000 r--s 00004000 07:00 133616     /home/caburnar/.m2/repository/relaxngDatatype/relaxngDatatype/20020414/relaxngDatatype-20020414.jar
+6ed87000-6ed96000 r--s 0010d000 07:00 133615     /home/caburnar/.m2/repository/msv/msv/20020414/msv-20020414.jar
+6ed96000-6ed9b000 r--s 0002a000 07:00 276100     /home/caburnar/.m2/repository/jaxen/jaxen/1.0-FCS/jaxen-1.0-FCS.jar
+6ed9b000-6eda0000 r--s 00016000 07:00 9766       /home/caburnar/.m2/repository/xml-apis/xml-apis/1.0.b2/xml-apis-1.0.b2.jar
+6eda0000-6eda8000 r--s 0006f000 07:00 133506     /home/caburnar/.m2/repository/dom4j/dom4j/1.4/dom4j-1.4.jar
+6eda8000-6edaa000 r--s 00007000 07:00 133505     /home/caburnar/.m2/repository/org/codehaus/cargo/cargo-core-api-util/1.2.0/cargo-core-api-util-1.2.0.jar
+6edaa000-6edad000 ---p 00000000 00:00 0 
+6edad000-6edfb000 rw-p 00000000 00:00 0 
+6edfb000-6edfd000 r--s 00002000 07:00 533081     /home/caburnar/.m2/repository/org/codehaus/plexus/plexus-compiler-javac/1.8.1/plexus-compiler-javac-1.8.1.jar
+6edfd000-6edff000 r--s 00000000 07:00 533065     /home/caburnar/.m2/repository/org/codehaus/plexus/plexus-compiler-manager/1.8.1/plexus-compiler-manager-1.8.1.jar
+6edff000-6ee00000 r--s 00004000 07:00 275426     /home/caburnar/.m2/repository/org/codehaus/plexus/plexus-compiler-api/1.8.1/plexus-compiler-api-1.8.1.jar
+6ee00000-6ef00000 rw-p 00000000 00:00 0 
+6ef00000-6effe000 rw-p 00000000 00:00 0 
+6effe000-6f000000 ---p 00000000 00:00 0 
+6f000000-6f100000 rw-p 00000000 00:00 0 
+6f100000-6f1f3000 rw-p 00000000 00:00 0 
+6f1f3000-6f200000 ---p 00000000 00:00 0 
+6f200000-6f300000 rw-p 00000000 00:00 0 
+6f300000-6f3f9000 rw-p 00000000 00:00 0 
+6f3f9000-6f400000 ---p 00000000 00:00 0 
+6f400000-6f4e3000 rw-p 00000000 00:00 0 
+6f4e3000-6f500000 ---p 00000000 00:00 0 
+6f500000-6f600000 rw-p 00000000 00:00 0 
+6f600000-6f6ef000 rw-p 00000000 00:00 0 
+6f6ef000-6f700000 ---p 00000000 00:00 0 
+6f700000-6f7ea000 rw-p 00000000 00:00 0 
+6f7ea000-6f800000 ---p 00000000 00:00 0 
+6f800000-6f8fb000 rw-p 00000000 00:00 0 
+6f8fb000-6f900000 ---p 00000000 00:00 0 
+6f900000-6f9e1000 rw-p 00000000 00:00 0 
+6f9e1000-6fa00000 ---p 00000000 00:00 0 
+6fa00000-6fafb000 rw-p 00000000 00:00 0 
+6fafb000-6fb00000 ---p 00000000 00:00 0 
+6fb00000-6fc00000 rw-p 00000000 00:00 0 
+6fc00000-6fcf1000 rw-p 00000000 00:00 0 
+6fcf1000-6fd00000 ---p 00000000 00:00 0 
+6fd00000-6fe00000 rw-p 00000000 00:00 0 
+6fe00000-6fef9000 rw-p 00000000 00:00 0 
+6fef9000-6ff00000 ---p 00000000 00:00 0 
+6ff00000-6ffd2000 rw-p 00000000 00:00 0 
+6ffd2000-70000000 ---p 00000000 00:00 0 
+70000000-700f9000 rw-p 00000000 00:00 0 
+700f9000-70100000 ---p 00000000 00:00 0 
+70100000-701f1000 rw-p 00000000 00:00 0 
+701f1000-70200000 ---p 00000000 00:00 0 
+70200000-702f9000 rw-p 00000000 00:00 0 
+702f9000-70300000 ---p 00000000 00:00 0 
+70300000-703f9000 rw-p 00000000 00:00 0 
+703f9000-70400000 ---p 00000000 00:00 0 
+70400000-704f9000 rw-p 00000000 00:00 0 
+704f9000-70500000 ---p 00000000 00:00 0 
+70500000-705f9000 rw-p 00000000 00:00 0 
+705f9000-70600000 ---p 00000000 00:00 0 
+70600000-706b6000 rw-p 00000000 00:00 0 
+706b6000-70700000 ---p 00000000 00:00 0 
+70700000-707f9000 rw-p 00000000 00:00 0 
+707f9000-70800000 ---p 00000000 00:00 0 
+70800000-708f9000 rw-p 00000000 00:00 0 
+708f9000-70900000 ---p 00000000 00:00 0 
+70900000-709f9000 rw-p 00000000 00:00 0 
+709f9000-70a00000 ---p 00000000 00:00 0 
+70a00000-70af9000 rw-p 00000000 00:00 0 
+70af9000-70b00000 ---p 00000000 00:00 0 
+70b00000-70b03000 r--s 00023000 07:00 273463     /home/caburnar/.m2/repository/jdom/jdom/1.0/jdom-1.0.jar
+70b03000-70b09000 r--s 0003b000 07:00 133504     /home/caburnar/.m2/repository/org/codehaus/cargo/cargo-core-api-module/1.2.0/cargo-core-api-module-1.2.0.jar
+70b09000-70b0d000 r--s 0001b000 07:00 133513     /home/caburnar/.m2/repository/org/codehaus/cargo/cargo-core-api-container/1.2.0/cargo-core-api-container-1.2.0.jar
+70b0d000-70b10000 ---p 00000000 00:00 0 
+70b10000-70b5e000 rw-p 00000000 00:00 0 
+70b5e000-70b61000 ---p 00000000 00:00 0 
+70b61000-70baf000 rw-p 00000000 00:00 0 
+70baf000-70bb2000 ---p 00000000 00:00 0 
+70bb2000-70c00000 rw-p 00000000 00:00 0 
+70c00000-70cf9000 rw-p 00000000 00:00 0 
+70cf9000-70d00000 ---p 00000000 00:00 0 
+70d00000-70df8000 rw-p 00000000 00:00 0 
+70df8000-70e00000 ---p 00000000 00:00 0 
+70e00000-70eef000 rw-p 00000000 00:00 0 
+70eef000-70f00000 ---p 00000000 00:00 0 
+70f00000-70ff9000 rw-p 00000000 00:00 0 
+70ff9000-71000000 ---p 00000000 00:00 0 
+71000000-710f8000 rw-p 00000000 00:00 0 
+710f8000-71100000 ---p 00000000 00:00 0 
+71100000-711fe000 rw-p 00000000 00:00 0 
+711fe000-71200000 ---p 00000000 00:00 0 
+71200000-712f9000 rw-p 00000000 00:00 0 
+712f9000-71300000 ---p 00000000 00:00 0 
+71300000-713f9000 rw-p 00000000 00:00 0 
+713f9000-71400000 ---p 00000000 00:00 0 
+71400000-714f9000 rw-p 00000000 00:00 0 
+714f9000-71500000 ---p 00000000 00:00 0 
+71500000-715f4000 rw-p 00000000 00:00 0 
+715f4000-71600000 ---p 00000000 00:00 0 
+71600000-717d0000 rw-p 00000000 00:00 0 
+717d0000-71800000 ---p 00000000 00:00 0 
+71800000-71900000 rw-p 00000000 00:00 0 
+71900000-719f9000 rw-p 00000000 00:00 0 
+719f9000-71a00000 ---p 00000000 00:00 0 
+71a00000-71af8000 rw-p 00000000 00:00 0 
+71af8000-71b00000 ---p 00000000 00:00 0 
+71b00000-71bf9000 rw-p 00000000 00:00 0 
+71bf9000-71c00000 ---p 00000000 00:00 0 
+71c00000-71cfb000 rw-p 00000000 00:00 0 
+71cfb000-71d00000 ---p 00000000 00:00 0 
+71d00000-71df9000 rw-p 00000000 00:00 0 
+71df9000-71e00000 ---p 00000000 00:00 0 
+71e00000-71ef9000 rw-p 00000000 00:00 0 
+71ef9000-71f00000 ---p 00000000 00:00 0 
+71f00000-71ff9000 rw-p 00000000 00:00 0 
+71ff9000-72000000 ---p 00000000 00:00 0 
+72000000-720f9000 rw-p 00000000 00:00 0 
+720f9000-72100000 ---p 00000000 00:00 0 
+72100000-721fd000 rw-p 00000000 00:00 0 
+721fd000-72200000 ---p 00000000 00:00 0 
+72200000-722f9000 rw-p 00000000 00:00 0 
+722f9000-72300000 ---p 00000000 00:00 0 
+72300000-723f7000 rw-p 00000000 00:00 0 
+723f7000-72400000 ---p 00000000 00:00 0 
+72400000-724f9000 rw-p 00000000 00:00 0 
+724f9000-72500000 ---p 00000000 00:00 0 
+72500000-725f1000 rw-p 00000000 00:00 0 
+725f1000-72600000 ---p 00000000 00:00 0 
+72600000-726f9000 rw-p 00000000 00:00 0 
+726f9000-72700000 ---p 00000000 00:00 0 
+72700000-727fc000 rw-p 00000000 00:00 0 
+727fc000-72800000 ---p 00000000 00:00 0 
+72800000-728fd000 rw-p 00000000 00:00 0 
+728fd000-72900000 ---p 00000000 00:00 0 
+72900000-729f9000 rw-p 00000000 00:00 0 
+729f9000-72a00000 ---p 00000000 00:00 0 
+72a00000-72afc000 rw-p 00000000 00:00 0 
+72afc000-72b00000 ---p 00000000 00:00 0 
+72b00000-72bff000 rw-p 00000000 00:00 0 
+72bff000-72c00000 ---p 00000000 00:00 0 
+72c00000-72cfc000 rw-p 00000000 00:00 0 
+72cfc000-72d00000 ---p 00000000 00:00 0 
+72d00000-72df1000 rw-p 00000000 00:00 0 
+72df1000-72e00000 ---p 00000000 00:00 0 
+72e00000-72efd000 rw-p 00000000 00:00 0 
+72efd000-72f00000 ---p 00000000 00:00 0 
+72f00000-72ffc000 rw-p 00000000 00:00 0 
+72ffc000-73000000 ---p 00000000 00:00 0 
+73000000-730fc000 rw-p 00000000 00:00 0 
+730fc000-73100000 ---p 00000000 00:00 0 
+73100000-73200000 rw-p 00000000 00:00 0 
+73200000-732fb000 rw-p 00000000 00:00 0 
+732fb000-73300000 ---p 00000000 00:00 0 
+73300000-733f9000 rw-p 00000000 00:00 0 
+733f9000-73400000 ---p 00000000 00:00 0 
+73400000-734c2000 rw-p 00000000 00:00 0 
+734c2000-73500000 ---p 00000000 00:00 0 
+73500000-735fb000 rw-p 00000000 00:00 0 
+735fb000-73600000 ---p 00000000 00:00 0 
+73600000-736fe000 rw-p 00000000 00:00 0 
+736fe000-73700000 ---p 00000000 00:00 0 
+73700000-73800000 rw-p 00000000 00:00 0 
+73800000-738da000 rw-p 00000000 00:00 0 
+738da000-73900000 ---p 00000000 00:00 0 
+73900000-739fc000 rw-p 00000000 00:00 0 
+739fc000-73a00000 ---p 00000000 00:00 0 
+73a00000-73afc000 rw-p 00000000 00:00 0 
+73afc000-73b00000 ---p 00000000 00:00 0 
+73b00000-73bff000 rw-p 00000000 00:00 0 
+73bff000-73c00000 ---p 00000000 00:00 0 
+73c00000-73e00000 rw-p 00000000 00:00 0 
+73e00000-73efa000 rw-p 00000000 00:00 0 
+73efa000-73f00000 ---p 00000000 00:00 0 
+73f00000-74000000 rw-p 00000000 00:00 0 
+74000000-740b1000 rw-p 00000000 00:00 0 
+740b1000-74100000 ---p 00000000 00:00 0 
+74100000-741fb000 rw-p 00000000 00:00 0 
+741fb000-74200000 ---p 00000000 00:00 0 
+74200000-743fe000 rw-p 00000000 00:00 0 
+743fe000-74400000 ---p 00000000 00:00 0 
+74400000-745fb000 rw-p 00000000 00:00 0 
+745fb000-74600000 ---p 00000000 00:00 0 
+74600000-746fd000 rw-p 00000000 00:00 0 
+746fd000-74700000 ---p 00000000 00:00 0 
+74700000-747f8000 rw-p 00000000 00:00 0 
+747f8000-74800000 ---p 00000000 00:00 0 
+74800000-748fb000 rw-p 00000000 00:00 0 
+748fb000-74900000 ---p 00000000 00:00 0 
+74900000-749fa000 rw-p 00000000 00:00 0 
+749fa000-74a00000 ---p 00000000 00:00 0 
+74a00000-74afe000 rw-p 00000000 00:00 0 
+74afe000-74b00000 ---p 00000000 00:00 0 
+74b00000-74bfb000 rw-p 00000000 00:00 0 
+74bfb000-74c00000 ---p 00000000 00:00 0 
+74c00000-74cf1000 rw-p 00000000 00:00 0 
+74cf1000-74d00000 ---p 00000000 00:00 0 
+74d00000-74dfa000 rw-p 00000000 00:00 0 
+74dfa000-74e00000 ---p 00000000 00:00 0 
+74e00000-74ef4000 rw-p 00000000 00:00 0 
+74ef4000-74f00000 ---p 00000000 00:00 0 
+74f00000-74ff0000 rw-p 00000000 00:00 0 
+74ff0000-75000000 ---p 00000000 00:00 0 
+75000000-750a3000 rw-p 00000000 00:00 0 
+750a3000-75100000 ---p 00000000 00:00 0 
+75100000-751fb000 rw-p 00000000 00:00 0 
+751fb000-75200000 ---p 00000000 00:00 0 
+75200000-75202000 r--s 00008000 07:00 9982       /home/caburnar/.m2/repository/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4.jar
+75202000-75205000 r--s 00010000 07:00 272976     /home/caburnar/.m2/repository/commons-discovery/commons-discovery/0.4/commons-discovery-0.4.jar
+75205000-75208000 r--s 00007000 07:00 17393      /home/caburnar/.m2/repository/org/codehaus/cargo/cargo-core-api-generic/1.2.0/cargo-core-api-generic-1.2.0.jar
+75208000-7520b000 r--s 0002f000 07:00 532882     /home/caburnar/.m2/repository/org/codehaus/plexus/plexus-utils/1.4.7/plexus-utils-1.4.7.jar
+7520b000-7520e000 r--s 0000a000 07:00 533296     /home/caburnar/.m2/repository/org/codehaus/plexus/plexus-io/1.0/plexus-io-1.0.jar
+7520e000-75212000 r--s 00028000 07:00 533107     /home/caburnar/.m2/repository/org/codehaus/plexus/plexus-archiver/1.0/plexus-archiver-1.0.jar
+75212000-75213000 r--s 00004000 07:00 274855     /home/caburnar/.m2/repository/org/apache/maven/maven-archiver/2.4.1/maven-archiver-2.4.1.jar
+75213000-75215000 r--s 00016000 07:00 17350      /home/caburnar/.m2/repository/org/codehaus/cargo/cargo-maven2-plugin/1.2.0/cargo-maven2-plugin-1.2.0.jar
+75215000-75217000 r--s 00007000 07:00 411714     /home/caburnar/.m2/repository/org/apache/maven/shared/maven-filtering/1.0-beta-2/maven-filtering-1.0-beta-2.jar
+75217000-7521b000 r--s 00034000 07:00 532945     /home/caburnar/.m2/repository/org/codehaus/plexus/plexus-utils/3.0/plexus-utils-3.0.jar
+7521b000-7521d000 r--s 00005000 07:00 275802     /home/caburnar/.m2/repository/xpp3/xpp3_min/1.1.4c/xpp3_min-1.1.4c.jar
+7521d000-75228000 r--s 0005f000 07:00 271273     /home/caburnar/.m2/repository/com/thoughtworks/xstream/xstream/1.3.1/xstream-1.3.1.jar
+75228000-7522a000 r--s 0000d000 07:00 540303     /home/caburnar/.m2/repository/org/codehaus/plexus/plexus-interpolation/1.15/plexus-interpolation-1.15.jar
+7522a000-7522f000 r--s 00029000 07:00 540301     /home/caburnar/.m2/repository/org/codehaus/plexus/plexus-archiver/2.1/plexus-archiver-2.1.jar
+7522f000-75232000 r--s 0000c000 07:00 540302     /home/caburnar/.m2/repository/org/codehaus/plexus/plexus-io/2.0.2/plexus-io-2.0.2.jar
+75232000-75234000 r--s 00004000 07:00 276085     /home/caburnar/.m2/repository/org/apache/maven/maven-archiver/2.5/maven-archiver-2.5.jar
+75234000-75237000 r--s 00011000 07:00 16784      /home/caburnar/.m2/repository/org/apache/maven/plugins/maven-war-plugin/2.2/maven-war-plugin-2.2.jar
+75237000-75238000 r--s 00002000 07:00 411985     /home/caburnar/.m2/repository/org/apache/maven/reporting/maven-reporting-api/2.0.9/maven-reporting-api-2.0.9.jar
+75238000-7523a000 r--s 00006000 07:00 411792     /home/caburnar/.m2/repository/org/apache/maven/shared/maven-common-artifact-filters/1.3/maven-common-artifact-filters-1.3.jar
+7523a000-7523c000 r--s 0000d000 07:00 274741     /home/caburnar/.m2/repository/org/apache/maven/surefire/maven-surefire-common/2.7.2/maven-surefire-common-2.7.2.jar
+7523c000-75240000 r--s 0001a000 07:00 274723     /home/caburnar/.m2/repository/org/apache/maven/surefire/surefire-api/2.7.2/surefire-api-2.7.2.jar
+75240000-75241000 r--s 00007000 07:00 274700     /home/caburnar/.m2/repository/org/apache/maven/surefire/surefire-booter/2.7.2/surefire-booter-2.7.2.jar
+75241000-75243000 r--s 00006000 07:00 9587       /home/caburnar/.m2/repository/org/apache/maven/plugins/maven-surefire-plugin/2.7.2/maven-surefire-plugin-2.7.2.jar
+75243000-752a3000 r--s 00d92000 07:00 411595     /usr/lib/jvm/java-6-openjdk/lib/tools.jar
+752a3000-752a5000 r--s 00006000 07:00 9572       /home/caburnar/.m2/repository/org/apache/maven/plugins/maven-compiler-plugin/2.3.2/maven-compiler-plugin-2.3.2.jar
+752a5000-752a7000 r--s 0000d000 07:00 533262     /home/caburnar/.m2/repository/org/codehaus/plexus/plexus-interpolation/1.13/plexus-interpolation-1.13.jar
+752a7000-752a8000 r--s 00001000 07:00 11851      /home/caburnar/.m2/repository/org/sonatype/plexus/plexus-build-api/0.0.4/plexus-build-api-0.0.4.jar
+752a8000-752aa000 r--s 00007000 07:00 411709     /home/caburnar/.m2/repository/org/apache/maven/shared/maven-filtering/1.0-beta-4/maven-filtering-1.0-beta-4.jar
+752aa000-752ad000 r--s 0001b000 07:00 9892       /home/caburnar/.m2/repository/junit/junit/3.8.1/junit-3.8.1.jar
+752ad000-752af000 r--s 00002000 07:00 533237     /home/caburnar/.m2/repository/org/codehaus/plexus/plexus-interactivity-api/1.0-alpha-4/plexus-interactivity-api-1.0-alpha-4.jar
+752af000-752b2000 ---p 00000000 00:00 0 
+752b2000-75300000 rw-p 00000000 00:00 0 
+75300000-75500000 rw-p 00000000 00:00 0 
+75500000-755fb000 rw-p 00000000 00:00 0 
+755fb000-75600000 ---p 00000000 00:00 0 
+75600000-75601000 r--s 00005000 07:00 133521     /home/caburnar/.m2/repository/saxpath/saxpath/1.0-FCS/saxpath-1.0-FCS.jar
+75601000-75603000 r--s 00006000 07:00 272888     /home/caburnar/.m2/repository/commons-cli/commons-cli/1.0/commons-cli-1.0.jar
+75603000-75604000 r--s 00001000 07:00 412068     /home/caburnar/.m2/repository/org/apache/maven/doxia/doxia-sink-api/1.0-alpha-7/doxia-sink-api-1.0-alpha-7.jar
+75604000-75605000 r--s 00002000 07:00 411979     /home/caburnar/.m2/repository/org/apache/maven/reporting/maven-reporting-api/2.0.6/maven-reporting-api-2.0.6.jar
+75605000-75606000 r--s 00005000 07:00 9314       /home/caburnar/.m2/repository/org/apache/maven/plugins/maven-resources-plugin/2.4.3/maven-resources-plugin-2.4.3.jar
+75606000-7560a000 r--s 00033000 07:00 275421     /home/caburnar/.m2/repository/org/codehaus/plexus/plexus-utils/2.0.5/plexus-utils-2.0.5.jar
+7560a000-7560b000 r--s 00005000 07:00 274340     /home/caburnar/.m2/repository/org/apache/maven/plugins/maven-clean-plugin/2.4.1/maven-clean-plugin-2.4.1.jar
+7560b000-7560e000 ---p 00000000 00:00 0 
+7560e000-7565c000 rw-p 00000000 00:00 0 
+7565c000-75661000 r--s 00020000 07:00 413144     /usr/local/apache-maven-3.0.3/lib/maven-model-builder-3.0.3.jar
+75661000-75663000 r--s 0000b000 07:00 413122     /usr/local/apache-maven-3.0.3/lib/wagon-provider-api-1.0-beta-7.jar
+75663000-75665000 r--s 0000d000 07:00 413127     /usr/local/apache-maven-3.0.3/lib/plexus-interpolation-1.14.jar
+75665000-75670000 r--s 0007d000 07:00 413119     /usr/local/apache-maven-3.0.3/lib/maven-core-3.0.3.jar
+75670000-75671000 r--s 00003000 07:00 413120     /usr/local/apache-maven-3.0.3/lib/wagon-http-lightweight-1.0-beta-7.jar
+75671000-75673000 r--s 00000000 07:00 413136     /usr/local/apache-maven-3.0.3/lib/plexus-component-annotations-1.5.5.jar
+75673000-75675000 r--s 00002000 07:00 413132     /usr/local/apache-maven-3.0.3/lib/plexus-cipher-1.4.jar
+75675000-7567b000 r--s 0002a000 07:00 413137     /usr/local/apache-maven-3.0.3/lib/sisu-inject-plexus-2.1.1.jar
+7567b000-75687000 r--s 0006b000 07:00 413134     /usr/local/apache-maven-3.0.3/lib/sisu-guice-2.9.4-no_aop.jar
+75687000-75689000 r--s 0000b000 07:00 413129     /usr/local/apache-maven-3.0.3/lib/maven-artifact-3.0.3.jar
+75689000-7568a000 r--s 00003000 07:00 413126     /usr/local/apache-maven-3.0.3/lib/aether-spi-1.11.jar
+7568a000-7568c000 r--s 00005000 07:00 413121     /usr/local/apache-maven-3.0.3/lib/wagon-http-shared-1.0-beta-7.jar
+7568c000-7568f000 r--s 00008000 07:00 413131     /usr/local/apache-maven-3.0.3/lib/maven-settings-builder-3.0.3.jar
+7568f000-75692000 r--s 00019000 07:00 413130     /usr/local/apache-maven-3.0.3/lib/nekohtml-1.9.6.2.jar
+75692000-75694000 r--s 0000c000 07:00 413141     /usr/local/apache-maven-3.0.3/lib/maven-aether-provider-3.0.3.jar
+75694000-75696000 r--s 00026000 07:00 413118     /usr/local/apache-maven-3.0.3/lib/maven-model-3.0.3.jar
+75696000-75697000 r--s 00002000 07:00 413150     /usr/local/apache-maven-3.0.3/lib/wagon-file-1.0-beta-7.jar
+75697000-75699000 r--s 00008000 07:00 413133     /usr/local/apache-maven-3.0.3/lib/xercesMinimal-1.9.6.2.jar
+75699000-7569b000 r--s 0000b000 07:00 413148     /usr/local/apache-maven-3.0.3/lib/maven-plugin-api-3.0.3.jar
+7569b000-756a1000 r--s 0003f000 07:00 413125     /usr/local/apache-maven-3.0.3/lib/maven-compat-3.0.3.jar
+756a1000-756a3000 r--s 00009000 07:00 413123     /usr/local/apache-maven-3.0.3/lib/commons-cli-1.2.jar
+756a3000-756a4000 r--s 0000a000 07:00 413135     /usr/local/apache-maven-3.0.3/lib/maven-embedder-3.0.3.jar
+756a4000-756a5000 r--s 00006000 07:00 413145     /usr/local/apache-maven-3.0.3/lib/plexus-sec-dispatcher-1.3.jar
+756a5000-756a7000 r--s 0000a000 07:00 413138     /usr/local/apache-maven-3.0.3/lib/maven-settings-3.0.3.jar
+756a7000-756aa000 r--s 0001c000 07:00 413139     /usr/local/apache-maven-3.0.3/lib/aether-impl-1.11.jar
+756aa000-756b0000 r--s 00033000 07:00 413128     /usr/local/apache-maven-3.0.3/lib/sisu-inject-bean-2.1.1.jar
+756b0000-756b4000 r--s 00033000 07:00 413143     /usr/local/apache-maven-3.0.3/lib/plexus-utils-2.0.6.jar
+756b4000-756b5000 ---p 00000000 00:00 0 
+756b5000-75735000 rw-p 00000000 00:00 0 
+75735000-75738000 ---p 00000000 00:00 0 
+75738000-75786000 rw-p 00000000 00:00 0 
+75786000-75789000 ---p 00000000 00:00 0 
+75789000-75807000 rw-p 00000000 00:00 0 
+75807000-7580a000 ---p 00000000 00:00 0 
+7580a000-75888000 rw-p 00000000 00:00 0 
+75888000-7588b000 ---p 00000000 00:00 0 
+7588b000-758d9000 rw-p 00000000 00:00 0 
+758d9000-758da000 r--p 0043a000 07:00 400242     /usr/lib/locale/locale-archive
+758da000-7591a000 r--p 002bd000 07:00 400242     /usr/lib/locale/locale-archive
+7591a000-75b1a000 r--p 00000000 07:00 400242     /usr/lib/locale/locale-archive
+75b1a000-75b1d000 ---p 00000000 00:00 0 
+75b1d000-75b6b000 rw-p 00000000 00:00 0 
+75b6b000-75b6e000 ---p 00000000 00:00 0 
+75b6e000-75bbc000 rw-p 00000000 00:00 0 
+75bbc000-75bbd000 ---p 00000000 00:00 0 
+75bbd000-75c70000 rw-p 00000000 00:00 0 
+75c70000-75e00000 r--s 037ba000 07:00 411213     /usr/lib/jvm/java-6-openjdk/jre/lib/rt.jar
+75e00000-75f00000 rw-p 00000000 00:00 0 
+75f00000-75f01000 r--p 00000000 00:00 0 
+75f01000-75f05000 r--s 0001a000 07:00 413140     /usr/local/apache-maven-3.0.3/lib/aether-util-1.11.jar
+75f05000-75f09000 r--s 00012000 07:00 413142     /usr/local/apache-maven-3.0.3/lib/aether-api-1.11.jar
+75f09000-75f0a000 ---p 00000000 00:00 0 
+75f0a000-75f8a000 rw-p 00000000 00:00 0 
+75f8a000-75f8b000 ---p 00000000 00:00 0 
+75f8b000-7600b000 rw-p 00000000 00:00 0 
+7600b000-7600c000 ---p 00000000 00:00 0 
+7600c000-7608c000 rw-p 00000000 00:00 0 
+7608c000-7608d000 ---p 00000000 00:00 0 
+7608d000-76120000 rw-p 00000000 00:00 0 
+76120000-7614d000 rw-p 00000000 00:00 0 
+7614d000-76160000 rw-p 00000000 00:00 0 
+76160000-7626e000 rw-p 00000000 00:00 0 
+7626e000-76281000 rw-p 00000000 00:00 0 
+76281000-762ae000 rw-p 00000000 00:00 0 
+762ae000-762c1000 rw-p 00000000 00:00 0 
+762c1000-763ce000 rw-p 00000000 00:00 0 
+763ce000-76415000 rw-p 00000000 00:00 0 
+76415000-76418000 ---p 00000000 00:00 0 
+76418000-7645f000 rw-p 00000000 00:00 0 
+7645f000-78a20000 rw-p 00000000 00:00 0 
+78a20000-7e460000 rw-p 00000000 00:00 0 
+7e460000-80870000 rw-p 00000000 00:00 0 
+80870000-a25c0000 rw-p 00000000 00:00 0 
+a25c0000-ab180000 rw-p 00000000 00:00 0 
+ab180000-ab6b0000 ---p 00000000 00:00 0 
+ab6b0000-b4660000 rw-p 00000000 00:00 0 
+b4660000-b4662000 r--s 00006000 07:00 413124     /usr/local/apache-maven-3.0.3/lib/aether-connector-wagon-1.11.jar
+b4662000-b4664000 r--s 00006000 07:00 413149     /usr/local/apache-maven-3.0.3/lib/maven-repository-metadata-3.0.3.jar
+b4664000-b4667000 r--s 0007d000 07:00 400647     /usr/lib/jvm/java-6-openjdk/jre/lib/jsse.jar
+b4667000-b4672000 rw-p 00000000 00:00 0 
+b4672000-b4727000 rw-p 00000000 00:00 0 
+b4727000-b49cf000 rwxp 00000000 00:00 0 
+b49cf000-b7727000 rw-p 00000000 00:00 0 
+b7727000-b772a000 ---p 00000000 00:00 0 
+b772a000-b777b000 rw-p 00000000 00:00 0 
+b777b000-b777d000 r--s 0000a000 07:00 413106     /usr/local/apache-maven-3.0.3/boot/plexus-classworlds-2.4.jar
+b777d000-b7785000 r--s 00066000 07:00 671523     /usr/share/java/gnome-java-bridge.jar
+b7785000-b7787000 r--s 0000f000 07:00 396311     /usr/lib/jvm/java-6-openjdk/jre/lib/ext/pulse-java.jar
+b7787000-b778f000 rw-s 00000000 07:00 132482     /tmp/hsperfdata_caburnar/19348
+b778f000-b7790000 rw-p 00000000 00:00 0 
+b7790000-b7791000 r--p 00000000 00:00 0 
+b7791000-b7793000 rw-p 00000000 00:00 0 
+bf804000-bf825000 rw-p 00000000 00:00 0          [stack]
+
+VM Arguments:
+jvm_args: -Dclassworlds.conf=/usr/local/maven/bin/m2.conf -Dmaven.home=/usr/local/maven 
+java_command: org.codehaus.plexus.classworlds.launcher.Launcher clean package -Dmaven.test.skip=true cargo:run
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+JAVA_HOME=/usr/lib/jvm/java-6-openjdk
+PATH=/usr/local/maven/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+USERNAME=caburnar
+LD_LIBRARY_PATH=/usr/lib/jvm/java-6-openjdk/jre/lib/i386/server:/usr/lib/jvm/java-6-openjdk/jre/lib/i386:/usr/lib/jvm/java-6-openjdk/jre/../lib/i386
+SHELL=/bin/bash
+DISPLAY=:0.0
+
+Signal Handlers:
+SIGSEGV: [libjvm.so+0x66a530], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGBUS: [libjvm.so+0x66a530], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGFPE: [libjvm.so+0x52e2c0], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGPIPE: [libjvm.so+0x52e2c0], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGXFSZ: [libjvm.so+0x52e2c0], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGILL: [libjvm.so+0x52e2c0], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGUSR1: SIG_DFL, sa_mask[0]=0x00000000, sa_flags=0x00000000
+SIGUSR2: [libjvm.so+0x52e150], sa_mask[0]=0x00000000, sa_flags=0x10000004
+SIGHUP: [libjvm.so+0x5311f0], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGINT: [libjvm.so+0x5311f0], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGTERM: [libjvm.so+0x5311f0], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGQUIT: [libjvm.so+0x5311f0], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+
+
+---------------  S Y S T E M  ---------------
+
+OS:Ubuntu 11.10 (oneiric)
+uname:Linux 3.0.0-17-generic #30-Ubuntu SMP Thu Mar 8 17:34:21 UTC 2012 i686
+libc:glibc 2.13 NPTL 2.13 
+rlimit: STACK 8192k, CORE 0k, NPROC 27561, NOFILE 4096, AS infinity
+load average:0.26 0.21 0.22
+
+/proc/meminfo:
+MemTotal:        3541872 kB
+MemFree:          435492 kB
+Buffers:          562400 kB
+Cached:           897364 kB
+SwapCached:         9604 kB
+Active:          2041600 kB
+Inactive:         955328 kB
+Active(anon):    1456700 kB
+Inactive(anon):   431820 kB
+Active(file):     584900 kB
+Inactive(file):   523508 kB
+Unevictable:        2416 kB
+Mlocked:              16 kB
+HighTotal:       2685316 kB
+HighFree:         278492 kB
+LowTotal:         856556 kB
+LowFree:          157000 kB
+SwapTotal:        262136 kB
+SwapFree:         105400 kB
+Dirty:              6316 kB
+Writeback:             0 kB
+AnonPages:       1530272 kB
+Mapped:           116264 kB
+Shmem:            348824 kB
+Slab:              61528 kB
+SReclaimable:      36256 kB
+SUnreclaim:        25272 kB
+KernelStack:        4104 kB
+PageTables:        12620 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:     2033072 kB
+Committed_AS:    4667556 kB
+VmallocTotal:     122880 kB
+VmallocUsed:       33516 kB
+VmallocChunk:      30052 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:         0 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       4096 kB
+DirectMap4k:       16376 kB
+DirectMap4M:      892928 kB
+
+
+CPU:total 4 (2 cores per cpu, 2 threads per core) family 6 model 37 stepping 5, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, ht
+
+Memory: 4k page, physical 3541872k(435492k free), swap 262136k(105400k free)
+
+vm_info: OpenJDK Server VM (20.0-b11) for linux-x86 JRE (1.6.0_23-b23), built on Feb 23 2012 06:26:43 by "buildd" with gcc 4.6.1
+
+time: Sun Apr 22 13:54:46 2012
+elapsed time: 14 seconds
+

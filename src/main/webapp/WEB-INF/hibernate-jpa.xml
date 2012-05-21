@@ -12,43 +12,62 @@
 			http://www.springframework.org/schema/context/spring-context-3.0.xsd
 	   		">
 
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+		p:location="classpath:jdbc.properties" />
 
-<!-- persistence -->
-  <bean id="datasource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-    <property name="driverClassName" value="${jdbc.driverClassName}" />
-    <property name="url" value="${jdbc.databaseurl}" />
-    <property name="username" value="${jdbc.username}" />
-    <property name="password" value="${jdbc.password}" />
-  </bean>
+	<!-- persistence -->
+	<bean id="datasource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.databaseurl}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
 
-  <bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-    <property name="databasePlatform" value="${jdbc.dialect}" />
-    <property name="showSql" value="true" />
-    <property name="generateDdl" value="false" />
-  </bean>
+	<bean id="jpaVendorAdapter"
+		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+		<property name="databasePlatform" value="${jdbc.dialect}" />
+		<property name="showSql" value="true" />
+		<property name="generateDdl" value="false" />
+	</bean>
 
-  <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-<!--     <property name="persistenceXmlLocation" value="classpath:/META-INF/persistence.xml" /> -->
-<!--     <property name="persistenceUnitName" value="MyPersistentUnit" /> -->
-    <property name="dataSource" ref="datasource" />
-    <property name="packagesToScan" value="com.rb.hopeapp" />
-    <property name="jpaVendorAdapter" ref="jpaVendorAdapter" />
-    <property name="jpaPropertyMap">
-      <map>
-      	<entry key="hibernate.show_sql" value="true" />
-        <entry key="hibernate.hbm2ddl.auto" value="update" />
-        <entry key="hibernate.jdbc.batch_size" value="0" /> <!-- 0 provides nicer error messages in postgres -->
-      </map>
-    </property>
-  </bean>
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+<!-- 		 <property name="persistenceXmlLocation" value="classpath:/META-INF/mypersistence.xml"/>  -->
+		<property name="persistenceUnitName" value="MyPersistentUnit" />
+		<property name="dataSource" ref="datasource" />
+		<!-- auto scan entity annotation, if persistence.xml is not defined -->
+		<property name="packagesToScan" value="com.rb.hopeapp" />
+		<property name="jpaVendorAdapter" ref="jpaVendorAdapter" />
+		<property name="jpaPropertyMap">
+			<map>
+				<entry key="hibernate.show_sql" value="false" />
+				<entry key="hibernate.hbm2ddl.auto" value="update" />
+				<entry key="hibernate.jdbc.batch_size" value="0" />  <!-- 0 provides nicer error messages in postgres -->
+			</map>
+		</property>
+	</bean>
 
-  <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-    <property name="entityManagerFactory" ref="entityManagerFactory" />
-    <property name="dataSource" ref="datasource" />
-  </bean>
+	<!-- Let's access the JTA transaction manager of the application server -->
+	<bean id="txManager"  class="org.springframework.orm.jpa.JpaTransactionManager">
+		
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
 
-<!-- 	<tx:jta-transaction-manager></tx:jta-transaction-manager> -->
-	<tx:annotation-driven transaction-manager="transactionManager"/>
-<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+
+	<tx:annotation-driven transaction-manager="txManager" />
+
+	<!-- enables interp retation of the @Required annotation to ensure that 
+		dependency injection actually occures -->
+	<bean
+		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+
+	<!-- (@PersistenceContext, @PersistenceUnit). -->
+
+	<bean
+		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+	<bean
+		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 
 </beans>

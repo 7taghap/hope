@@ -15,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
 import org.aspectj.apache.bcel.generic.AllocationInstruction;
@@ -38,9 +39,11 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.rb.hopeapp.domain.AjaxResponse;
 import com.rb.hopeapp.domain.Product;
 import com.rb.hopeapp.domain.ProductCategory;
 import com.rb.hopeapp.domain.ProductDtl;
+import com.rb.hopeapp.domain.SearchCriteria;
 import com.rb.hopeapp.domain.UnitConversion;
 import com.rb.hopeapp.domain.User;
 import com.rb.hopeapp.exception.NoCategoriesException;
@@ -64,18 +67,19 @@ public class InventoryController {
 			.getLogger(InventoryController.class);
 
 	@Autowired
-	@Qualifier("productService")
 	ProductManager productService;
 	
 
 	List<ProductDtl> productDtls = new AutoPopulatingList(ProductDtl.class);
 
-	@RequestMapping(value = "/list.html", method = RequestMethod.GET)
-	public ModelAndView getProducts(@ModelAttribute("p")String p) {
-		Map<String, Object> myModel = new HashMap<String, Object>();
-
-		List<ProductDtl> products = productService.getProductDtls();
-		logger.info("p value :"+ p);
+	@RequestMapping(value = "/list.html",method=RequestMethod.GET)
+	public ModelAndView getProducts(@ModelAttribute("p")String p,
+			@ModelAttribute("q")String q) {
+		ModelAndView mv = new ModelAndView("paging");
+//		logger.info("q :"+ criteria.toString());
+		logger.info("q : " + q);
+		List<ProductDtl> products = productService.getProductDtls(q);
+		logger.info("product list :"+ products.size());
 		PagedListHolder<ProductDtl> productList = new PagedListHolder<ProductDtl>(products);
 		try{
 			productList.setPage(Integer.parseInt(p));
@@ -84,11 +88,10 @@ public class InventoryController {
 			logger.info(nfe.getMessage());
 		}
 		productList.setPageSize(2);
-//		myModel.put("products", productList);
-//		myModel.put("pagedListHolder", productList);
-		
-//		Hibernate.initialize(products.get(index))
-		return new ModelAndView("paging", "pagedListHolder", productList);
+		mv.addObject("pagedListHolder", productList);
+//			mv.addObject("searchCriteria", criteria);
+//		return new ModelAndView("paging", "pagedListHolder", productList);
+		return mv;
 	}
 	
 
@@ -143,12 +146,15 @@ public class InventoryController {
 
 	@RequestMapping(value = "/addItemAjax.html", method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_VALUE })
 	@ResponseBody
-	public ProductDtl addDtlProduct(@ModelAttribute("productDtl")ProductDtl productDtl,
+	public ProductDtl addDtlProduct(@Valid ProductDtl productDtl,
 			BindingResult result) {
-
-		logger.info("product Dtl :"+ productDtl.toString());
-		productDtls.add(productDtl);
+		if (!result.hasErrors()) {
+			productDtls.add(productDtl);
+		}
+	
+			
 		return productDtl;
+	
 	}
 	
 	@RequestMapping(value="/totalQty.html", method=RequestMethod.POST,

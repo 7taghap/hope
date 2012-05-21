@@ -3,23 +3,36 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        	xmlns:context="http://www.springframework.org/schema/context"
-       		xmlns:mvc="http://www.springframework.org/schema/mvc"
+       	xmlns:mvc="http://www.springframework.org/schema/mvc"
+       	 xmlns:vld="http://www.springmodules.org/validation/bean/validation"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+       http://www.springmodules.org/validation/bean/validation
+       http://www.springmodules.org/validation/bean/validator-3.1.xsd
        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
   <!-- the application context definition for the springapp DispatcherServlet -->
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
-        <property name="basename" value="messages"/>
+<!--         <property name="basename" value="messages"/> -->
+		<property name="basenames">
+		      <list>
+		        <value>messages</value>
+		        <value>msgerror</value>
+		      </list>
+		 </property>
     </bean>
+    
+    
+    
     <context:annotation-config />
     <mvc:annotation-driven/>
-<!-- 	<context:component-scan base-package="com.rb.hopeapp.controller" /> -->
+	<context:component-scan base-package="com.rb.hopeapp" />
 	
-	<context:component-scan base-package="com.rb.hopeapp" use-default-filters="false">
-	<context:include-filter expression="org.springframework.stereotype.Controller" type="annotation"/>
-	</context:component-scan>
+<!-- 	<context:component-scan base-package="com.rb.hopeapp" use-default-filters="false"> -->
+<!-- 	<context:include-filter expression="org.springframework.stereotype.Controller" type="annotation"/> -->
+<!-- 	</context:component-scan> -->
+	
 	
 	
 <!--   <bean name="/hello.htm" class="com.rb.hopeapp.web.controller.HelloController"/> -->

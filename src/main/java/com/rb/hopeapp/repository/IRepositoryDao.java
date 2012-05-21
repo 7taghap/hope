@@ -11,5 +11,5 @@ public interface IRepositoryDao<T extends Serializable> {
 	List<T> findByCategory(final String category);
 	List<T> findByName(final String name);
 	List<T> findAll();
-	boolean deleteProduct(T product);
+	boolean remove(T entity);
 }

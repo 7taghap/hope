@@ -23,7 +23,8 @@ public interface ProductManager extends Serializable {
     public Product saveProduct(Product product) throws ProductNotSaveException,
     NoSuchNameException,NoSuchStatusException;
 
-    public List<ProductDtl> getProductDtls();
+    public List<ProductDtl> getProductDtls(String name);
     public double computeProductTotalQtyOnHand(Product product) throws NoSuchNameException;
+    public void updateProductInventory(int productDtlId, int qty);
     
 }

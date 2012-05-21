@@ -99,30 +99,41 @@ $.fn.addData = function (aDataSupplied,removable) {
 }
 
 $.fn.getData = function(excludeLast) {
-//	var aData ="[";
-//	var value = "";
+
 	var aData = new Array();
 	var rows = new Array();
 	$(this).find('tbody tr').each(function(idx){
 		var tds = $(this).find('td').length;
 		if (excludeLast)
 				tds = tds - 1;
-//		value = "";
+
 		aData = new Array();
 		$(this).find('td').each(function (idx) {
 			if (idx < tds) {
-//				 value += '"'+$(this).html()+'",';
 				aData[idx] = $(this).html();
 			}
 		});
-//		value = value.substring(0,value.length-1);
-//		alert(value);
-//		aData +="[" +value+"],";
+
 		rows[idx] = aData;
 		
 	});
-//	aData = aData.substring(0,aData.length-1);
-//	aData +="]";
-//	alert(aData);
+
 	return rows;
+}
+
+/************ input validation **************/
+
+$.fn.NotEmpty = function () {
+	var thisId = $(this).attr('id');
+
+	if ($(this).val().length < 1) {
+		$(this).addClass("error");
+		return false;
+	}
+	else {
+		$(this).removeClass("error");
+		return true;
+	}
+	
+	
 }

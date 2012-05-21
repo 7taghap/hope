@@ -93,6 +93,7 @@
 		<tr>
 			<td>Product Detail Name </td>
 			<td><form:input path="productDtlName" value=""/></td>
+			<td><form:errors path="productDtlName"/>
 		</tr>
 		<tr>
 			<td>Selling Qty</td>
@@ -125,6 +126,7 @@
 
 <script type="text/javascript">
 
+
 // compute total base on table value
 function computeTotalQty() {
 	//var totalQtyHand = $("#box-table").getSumOfRow(4);
@@ -143,6 +145,7 @@ function computeTotalQty() {
 
 	//product dtl add button
     $("#addProductDtl").click(function() {
+    	if ($("#productDtlName").NotEmpty()) {
 	
 		$.ajax({
 			type:"post",
@@ -165,6 +168,7 @@ function computeTotalQty() {
 		TopUp.overlayClose();
 		
 		return false;
+	}
 	});
     
     

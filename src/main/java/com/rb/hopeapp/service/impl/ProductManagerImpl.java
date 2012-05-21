@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
@@ -110,17 +111,18 @@ public class ProductManagerImpl implements ProductManager{
 				UnitConversion unit = unitConversionDao.findByName(productDtl.getUnitConversion().getName());
 				logger.info("unit for product dtl:"+ unit.toString());
 				productDtl.setUnitConversion(unit);
-				productDtl.setCreatedBy(AppUtil.getInstance().getInstance().getUser());
-				productDtl.setLastUpdatedBy(AppUtil.getInstance().getInstance().getUser());
+				productDtl.setCreatedBy(AppUtil.getInstance().getUser());
+				productDtl.setLastUpdatedBy(AppUtil.getInstance().getUser());
 				productDtl.setLastUpdatedDate(AppUtil.getInstance().getCurrentDate());
+				productDtl.setCreatedDate(AppUtil.getInstance().getCurrentDate());
 				productDtls.add(productDtl);
 				
 			}
 		}
 		product.setCreatedDate(AppUtil.getInstance().getCurrentDate());
 		product.setUpdateDate(AppUtil.getInstance().getCurrentDate());
-		product.setCreatedBy(AppUtil.getInstance().getInstance().getUser());
-		product.setUpdateBy(AppUtil.getInstance().getInstance().getUser());
+		product.setCreatedBy(AppUtil.getInstance().getUser());
+		product.setUpdateBy(AppUtil.getInstance().getUser());
 		product.setProductDtls(productDtls);
 		logger.info("exccute save");
 		product = productDao.saveProduct(product);
@@ -140,11 +142,31 @@ public class ProductManagerImpl implements ProductManager{
 		return totalQtyonHand;
 	}
 
-	public List<ProductDtl> getProductDtls() {
-		return productDtlDao.findAll();
+	public List<ProductDtl> getProductDtls(String q) {
+		if (q!=null && q.length() > 2)
+			return productDtlDao.findProductDtlsLike(q);
+		else 
+			return productDtlDao.findAll();
 	}
+	
+	
 
 	
+	public void updateProductInventory(int productDtlId, int qty) {
+		// TODO Auto-generated method stub
+		double qtyOnHand = 0.0;
+		ProductDtl productDtl = productDtlDao.findById(productDtlId);
+		if (productDtl.getQtyOnHand() >= qty) {
+			qtyOnHand = productDtl.getQtyOnHand() - qty;
+			
+		}
+		else {
+			// get qty from other dtl
+//			productDao.
+		}
+		productDtl.setQtyOnHand(qtyOnHand);
+	}
+
 	/******************** setters and getters ***********************/
 	public ProductDao getProductDao() {
 		return productDao;

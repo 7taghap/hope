@@ -33,15 +33,15 @@
 
   <bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
     <property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect" />
-    <property name="showSql" value="false" />
+    <property name="showSql" value="true" />
     <property name="generateDdl" value="false" />
   </bean>
 
   <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-    <property name="persistenceXmlLocation" value="classpath:/persistence-test.xml" />
-    <property name="persistenceUnitName" value="testPU" />
+<!--     <property name="persistenceXmlLocation" value="classpath:/persistence-test.xml" /> -->
+    <property name="persistenceUnitName" value="MyPersistentUnit" />
     <property name="dataSource" ref="datasource" />
-<!--     <property name="packagesToScan" value="com.rb.hopeapp" /> -->
+    <property name="packagesToScan" value="com.rb.hopeapp" />
     <property name="jpaVendorAdapter" ref="jpaVendorAdapter" />
     <property name="jpaPropertyMap">
       <map>
@@ -62,4 +62,6 @@
     <property name="entityManagerFactory" ref="entityManagerFactory" />
     <property name="dataSource" ref="datasource" />
   </bean>
+  <!-- import bean injection -->
+  <import resource="test-services.xml"/>
   </beans>

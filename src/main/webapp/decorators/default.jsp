@@ -13,7 +13,7 @@
 <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
 <link rel="stylesheet" type="text/css" href="${ctx}/styles/default/style.css" title="default" />
 
- <script type="text/javascript" src="${ctx}/javascripts/top_up-min.js?libs=core&images_path=/images/top_up/&fast_mode=1"></script>
+ <script type="text/javascript" src="${ctx}/javascripts/top_up-min.js?libs=core&images_path=/${ctx}/images/top_up/&fast_mode=1"></script>
 <!--  <script type="text/javascript" src="/javascripts/datatable-1.9.js"></script> -->
   <script type="text/javascript" src="${ctx}/javascripts/utiljs.js"></script>
 <decorator:head/>

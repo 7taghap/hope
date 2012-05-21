@@ -28,16 +28,14 @@ public class ProductDaoImpl extends AbstractJpaDao<Integer, Product> implements 
 	
 	public Product saveProduct(Product product) throws ProductNotSaveException{
 		try{
-			System.out.println("before saving product" + product.toString());
+
 			if(product.getProductId() > 0) {
 				update(product);
 			}
 			else {
-				System.out.println("saving product");
-//				entityManager.getTransaction().begin();
+
 				save(product);
-				System.out.println("after save :" + product.getProductId());
-//				entityManager.getTransaction().commit();
+
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -66,5 +64,6 @@ public class ProductDaoImpl extends AbstractJpaDao<Integer, Product> implements 
 				.setParameter(ProductNameQueries.PARAM_NAME, name).getResultList();
 		return products;
 	}
+	
 
 }
